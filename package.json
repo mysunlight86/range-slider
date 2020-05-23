@@ -1,0 +1,39 @@
+{
+  "name": "range-slider",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack-dev-server --open --mode=development",
+    "build": "webpack --mode=production",
+    "test": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mysunlight86/range-slider.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mysunlight86/range-slider/issues"
+  },
+  "homepage": "https://github.com/mysunlight86/range-slider#readme",
+  "devDependencies": {
+    "@types/jasmine": "^3.3.13",
+    "html-webpack-plugin": "^3.2.0",
+    "karma": "^5.0.9",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^2.0.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-spec-reporter": "0.0.32",
+    "karma-webpack": "^4.0.2",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.7.2"
+  }
+}
