@@ -1,7 +1,7 @@
 {
   "name": "range-slider",
   "version": "1.0.0",
-  "description": "",
+  "description": "Slider-range with two handles",
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --mode=development",
