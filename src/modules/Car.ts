@@ -20,4 +20,5 @@ class Car {
 //   alert('Спасибо!');
 // });
 
-export default { Car };
+// eslint-disable-next-line import/prefer-default-export
+export { Car };
