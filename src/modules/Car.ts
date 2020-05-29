@@ -16,9 +16,4 @@ class Car {
   }
 }
 
-// elem.addEventListener('click', function() {
-//   alert('Спасибо!');
-// });
-
-// eslint-disable-next-line import/prefer-default-export
-export { Car };
+export default Car;

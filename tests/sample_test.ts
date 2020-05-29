@@ -1,4 +1,5 @@
-import { Car } from '../src/modules/Car';
+/* eslint-disable no-undef */
+import Car from '../src/modules/Car';
 
 describe('Car', () => {
   it('can create', () => {
