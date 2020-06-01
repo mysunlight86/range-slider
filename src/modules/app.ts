@@ -1,6 +1,5 @@
 class User {
   name: string;
-
   age: number;
 
   constructor(_name: string, _age: number) {
