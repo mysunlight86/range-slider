@@ -1,16 +1,36 @@
+$widthSliderThumb: 16px;
+$widthTipValue: 40px;
+$leftSliderThumb: 100px;
+$leftTipValue: $leftSliderThumb - ($widthTipValue - $widthSliderThumb) / 2;
+
 .slider-body {
   width: 300px;
-  height: 5px;
+  height: 6px;
   background-color: #e5e5e5;
   border-radius: 5px;
+  margin-top: 50px;
 }
 
 .slider-thumb {
-  width: 15px;
-  height: 15px;
+  width: $widthSliderThumb;
+  height: 16px;
   background-color: red;
   position: relative;
-  left: 100px;
+  left: $leftSliderThumb;
   top: -5px;
   border-radius: 50%;
+}
+
+.tip-value {
+  width: $widthTipValue;
+  height: 20px;
+  background-color: red;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  left: $leftTipValue;
+  top: -47px;
+  border-radius: 5px;
 }

@@ -30,7 +30,14 @@
         "no-console": "off",
         "func-names": ["error", "never"],
         "no-shadow": "off",
-        "no-undef": "off"
+        "no-undef": "off",
+        "max-len": [
+          "error",
+          {
+            "code": 120,
+            "ignoreUrls": true
+          }
+        ]
     },
     "settings": {
         "import/resolver": {
