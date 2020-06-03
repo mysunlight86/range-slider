@@ -5,6 +5,7 @@ class SliderBody {
   constructor() {
     this.bodySlider = document.createElement('DIV');
     this.bodySlider.classList.add('slider-body');
+    this.bodySlider.classList.add('fill-slider-line');
     this.bodySlider.setAttribute('id', 'slider-body');
   }
 

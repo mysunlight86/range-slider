@@ -23,4 +23,4 @@ The project is written in the vscode program with the eslint extension. [Eslint 
 
 An HTML file is created from pug files, css is compiled from scss, and js scripts are written in typescript.<br/>
 
-To add a plugin to a page you need to create a block `<div id="range-slider"></div>`.<br/>
+To add a plugin to a page you need to create a block `<div id="range-slider"></div>`. You can change the width of this block (by default it is 300px).<br/>
