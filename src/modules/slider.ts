@@ -11,21 +11,21 @@ function sliderRun() {
   }
 
   function onMouseMove(event: MouseEvent): void {
-    let newLeft = event.clientX - delta - slider.getBoundingClientRect().left;
+    let thumbPoint = event.clientX - slider.getBoundingClientRect().left - delta;
 
     // курсор вышел из слайдера => оставить бегунок в его границах.
-    if (newLeft < 0) {
-      newLeft = 0;
+    if (thumbPoint < -delta) {
+      thumbPoint = -delta;
     }
-    const rightEdge = slider.offsetWidth;
-    if (newLeft > rightEdge) {
-      newLeft = rightEdge;
+    const rightEdge = slider.offsetWidth - delta;
+    if (thumbPoint > rightEdge) {
+      thumbPoint = rightEdge;
     }
 
-    thumb.style.left = `${newLeft}px`;
-    tip.textContent = `${newLeft}`;
-    tip.style.left = `${newLeft - (tip.offsetWidth - thumb.offsetWidth) / 2}px`;
-    fillSliderLine(newLeft);
+    thumb.style.left = `${thumbPoint}px`;
+    tip.textContent = `${thumbPoint + delta}`;
+    tip.style.left = `${thumbPoint - (tip.offsetWidth - thumb.offsetWidth) / 2}px`;
+    fillSliderLine(thumbPoint);
   }
 
   function onMouseUp(): void {
@@ -34,19 +34,10 @@ function sliderRun() {
   }
 
   function onMouseDown(event: MouseEvent): void {
-    event.preventDefault(); // предотвратить запуск выделения (действие браузера)
+    event.preventDefault();
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-  }
-
-  function onMouseClick(event: MouseEvent): void {
-    event.preventDefault();
-    const clickPoint = event.clientX - delta - slider.getBoundingClientRect().left;
-    thumb.style.left = `${clickPoint}px`;
-    tip.textContent = `${clickPoint + delta}`;
-    tip.style.left = `${clickPoint - (tip.offsetWidth - thumb.offsetWidth) / 2}px`;
-    fillSliderLine(clickPoint);
   }
 
   function returnFalse() {
@@ -54,7 +45,7 @@ function sliderRun() {
   }
 
   thumb.addEventListener('mousedown', onMouseDown);
-  slider.addEventListener('click', onMouseClick);
+  slider.addEventListener('click', onMouseMove);
   thumb.addEventListener('dragstart', returnFalse);
 }
 
