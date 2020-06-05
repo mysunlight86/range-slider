@@ -1,10 +1,11 @@
 $widthSliderThumb: 16px;
 $widthTipValue: 40px;
-$leftSliderThumb: 100px;
+$leftSliderThumb: 100px - $widthSliderThumb / 2;
 $leftTipValue: $leftSliderThumb - ($widthTipValue - $widthSliderThumb) / 2;
 
 div {
   box-sizing:content-box;
+  // box-sizing:border-box;
 }
 
 #range-slider {
@@ -27,6 +28,8 @@ div {
   width: $widthSliderThumb;
   height: 16px;
   background-color: red;
+  // background-color: transparent;
+  // border: 1px solid black;
   position: relative;
   left: $leftSliderThumb;
   top: -5px;
@@ -50,6 +53,7 @@ div {
 .scale {
   display: flex;
   justify-content: space-between;
+  // display: grid;
   width: 100%;
   height: 20px;
   margin: 10px 0 10px 0px;
