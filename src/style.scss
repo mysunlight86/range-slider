@@ -4,8 +4,8 @@ $leftSliderThumb: 100px - $widthSliderThumb / 2;
 $leftTipValue: $leftSliderThumb - ($widthTipValue - $widthSliderThumb) / 2;
 
 div {
-  box-sizing:content-box;
-  // box-sizing:border-box;
+  // box-sizing:content-box;
+  box-sizing:border-box;
 }
 
 #range-slider {
@@ -17,19 +17,18 @@ div {
   width: 100%;
   height: 6px;
   background-color: #e5e5e5;
+  background: linear-gradient(to right, red 100px, #e5e5e5 100px);
   border-radius: 5px;
 }
 
-.fill-slider-line {
-  background: linear-gradient(to right, red 100px, #e5e5e5 100px);
-}
+// .fill-slider-line {
+//   background: linear-gradient(to right, red 100px, #e5e5e5 100px);
+// }
 
 .slider-thumb {
   width: $widthSliderThumb;
   height: 16px;
   background-color: red;
-  // background-color: transparent;
-  // border: 1px solid black;
   position: relative;
   left: $leftSliderThumb;
   top: -5px;
@@ -51,11 +50,7 @@ div {
 }
 
 .scale {
-  // display: flex;
-  // justify-content: space-between;
-  // display: grid;
   width: 100%;
   height: 20px;
   margin: 10px 0 10px 0px;
-  // border: 1px solid #000;
 }

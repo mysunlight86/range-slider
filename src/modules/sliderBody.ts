@@ -5,7 +5,7 @@ class SliderBody {
   constructor() {
     this.bodySlider = document.createElement('DIV');
     this.bodySlider.classList.add('slider-body');
-    this.bodySlider.classList.add('fill-slider-line');
+    // this.bodySlider.classList.add('fill-slider-line');
     this.bodySlider.setAttribute('id', 'slider-body');
   }
 
@@ -15,6 +15,10 @@ class SliderBody {
 
   destroy() {
     this.bodySlider.remove();
+  }
+
+  getWidth() {
+    return this.bodySlider.offsetWidth;
   }
 }
 

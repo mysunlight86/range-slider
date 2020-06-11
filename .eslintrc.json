@@ -21,8 +21,15 @@
         "@typescript-eslint",
         "fsd"
     ],
+    "overrides": [
+        {
+            "files": []
+            // "files": ["*.md"],
+            // "processor": "a-plugin/markdown"
+        }
+    ],
     "rules": {
-        "import/extensions": "off",
+        // "import/extensions": "off",
         "lines-between-class-members": [
             "error", "always",
             { "exceptAfterSingleLine": true }
@@ -30,7 +37,7 @@
         "no-console": "off",
         "func-names": ["error", "never"],
         "no-shadow": "off",
-        "no-undef": "off",
+        // "no-undef": "off",
         "max-len": [
           "error",
           {
@@ -41,6 +48,10 @@
         "no-plusplus": [
             "error",
             { "allowForLoopAfterthoughts": true }
+        ],
+        "no-underscore-dangle": [
+            "error",
+            { "allowAfterThis": true }
         ]
     },
     "settings": {

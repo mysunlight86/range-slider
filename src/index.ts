@@ -5,7 +5,8 @@ import SliderBody from './modules/sliderBody';
 import SliderThumb from './modules/sliderThumb';
 import TipValue from './modules/tipValue';
 import Scale from './modules/scale';
-// import User from './modules/app';
+import { ConcreteSubject } from './modules/app';
+import { ConcreteObserverA, ConcreteObserverB } from './modules/presenter';
 
 const sliderBody: SliderBody = new SliderBody();
 sliderBody.init();
@@ -21,12 +22,31 @@ scale.init();
 
 sliderRun();
 
+/**
+* Клиентский код.
+*/
+
+const subject = new ConcreteSubject();
+
+const observer1 = new ConcreteObserverA();
+subject.attach(observer1);
+
+const observer2 = new ConcreteObserverB();
+subject.attach(observer2);
+
+subject.someBusinessLogic();
+subject.someBusinessLogic();
+
+subject.detach(observer2);
+
+subject.someBusinessLogic();
+
 // const el = document.getElementById('content');
 
 // const tom: User = new User('Том', 29);
 // el.innerHTML = `Имя: ${tom.name} возраст: ${tom.age}`;
 
-const MVP = {
+/* const MVP = {
   makeObservableSubject() {
     const observers = [];
     const addObserver = function (o) {
@@ -143,7 +163,7 @@ const MVP = {
     //   model.setSelectedIndex(view.select[0].selectedIndex);
     // });
   },
-};
+}; */
 
 /* $(document).ready(function () {
   var model = new OMVC.Model();
@@ -151,8 +171,8 @@ const MVP = {
   var controller = new OMVC.Controller(model, view);
 }); */
 
-const model = new MVP.Model();
-const view = new MVP.View();
-const controller = new MVP.Controller(model, view);
+// const model = new MVP.Model();
+// const view = new MVP.View();
+// const controller = new MVP.Controller(model, view);
 
-controller();
+// controller();
