@@ -1,15 +1,17 @@
 class SliderBody {
-  container = document.getElementById('range-slider');
+  private _parentId: string;
+  container: HTMLElement;
   bodySlider: HTMLElement;
 
-  constructor() {
-    this.bodySlider = document.createElement('DIV');
-    this.bodySlider.classList.add('slider-body');
-    // this.bodySlider.classList.add('fill-slider-line');
-    this.bodySlider.setAttribute('id', 'slider-body');
-  }
+  constructor(parentId) {
+    this._parentId = parentId;
+  };
 
   init() {
+    this.container = document.getElementById(this._parentId);
+    this.bodySlider = document.createElement('DIV');
+    this.bodySlider.classList.add('slider-body');
+    this.bodySlider.setAttribute('id', 'slider-body');
     this.container.append(this.bodySlider);
   }
 
@@ -17,9 +19,9 @@ class SliderBody {
     this.bodySlider.remove();
   }
 
-  getWidth() {
-    return this.bodySlider.offsetWidth;
-  }
+  // getWidth() {
+  //   return this.bodySlider.offsetWidth;
+  // }
 }
 
 export default SliderBody;

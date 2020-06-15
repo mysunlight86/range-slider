@@ -6,10 +6,11 @@ import SliderThumb from './modules/sliderThumb';
 import TipValue from './modules/tipValue';
 import Scale from './modules/scale';
 import { ConcreteSubject } from './modules/app';
+import View from './modules/view';
 import { ConcreteObserverA, ConcreteObserverB } from './modules/presenter';
 
-const sliderBody: SliderBody = new SliderBody();
-sliderBody.init();
+const view: View = new View();
+view.show();
 
 const sliderThumb: SliderThumb = new SliderThumb();
 sliderThumb.init();

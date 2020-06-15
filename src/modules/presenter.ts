@@ -24,10 +24,10 @@ class ConcreteObserverA implements Observer {
 }
 
 class ModelObserver implements Observer {
-  transfer() {
-    const view: View = new View();
-    return view.getWidthSlider();
-  }
+  // transfer() {
+  //   const view: View = new View();
+    // return view.getWidthSlider();
+  // }
   update(model) {
 
   }
