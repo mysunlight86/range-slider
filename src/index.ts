@@ -9,11 +9,15 @@ import { ConcreteSubject } from './modules/app';
 import View from './modules/view';
 import { ConcreteObserverA, ConcreteObserverB } from './modules/presenter';
 
-const view: View = new View();
+const view: View = new View('range-slider');
 view.show();
+// const slider2: View = new View();
+// slider2.hide();
+// const slider3: View = new View('');
+// slider3.hide();
 
-const sliderThumb: SliderThumb = new SliderThumb();
-sliderThumb.init();
+// const sliderThumb: SliderThumb = new SliderThumb();
+// sliderThumb.init();
 
 const tipValue: TipValue = new TipValue();
 tipValue.init();

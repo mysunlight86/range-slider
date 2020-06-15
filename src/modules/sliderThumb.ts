@@ -1,14 +1,17 @@
 class SliderThumb {
-  container = document.getElementById('slider-body');
+  private _parentId: string;
+  container: HTMLElement;
   thumbSlider: HTMLElement;
 
-  constructor() {
+  constructor(parentId) {
+    this._parentId = parentId;
+  };
+
+  init() {
+    this.container = document.getElementById(this._parentId);
     this.thumbSlider = document.createElement('DIV');
     this.thumbSlider.classList.add('slider-thumb');
     this.thumbSlider.setAttribute('id', 'slider-thumb');
-  }
-
-  init() {
     this.container.append(this.thumbSlider);
   }
 

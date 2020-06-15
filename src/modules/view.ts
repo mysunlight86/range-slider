@@ -1,11 +1,19 @@
 import SliderBody from './sliderBody';
+import SliderThumb from './sliderThumb';
 
 export default class View {
-  constructor() {}
+  private _parentId: string;
+  sliderLineId: string;
+
+  constructor(parentId?) {
+    this._parentId = parentId;
+  };
 
   show() {
-    const sliderBody: SliderBody = new SliderBody('range-slider');
-    sliderBody.init();
+    const sliderBody: SliderBody = new SliderBody(this._parentId);
+    this.sliderLineId = sliderBody.init();
+    const sliderThumb: SliderThumb = new SliderThumb(this.sliderLineId);
+    sliderThumb.init();
   }
 
   // sliderLength: number;
