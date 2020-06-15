@@ -1,4 +1,4 @@
-class SliderBody {
+export default class SliderBody {
   private _parentId: string;
   container: HTMLElement;
   bodySlider: HTMLElement;
@@ -25,5 +25,3 @@ class SliderBody {
   //   return this.bodySlider.offsetWidth;
   // }
 }
-
-export default SliderBody;

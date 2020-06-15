@@ -1,4 +1,4 @@
-class SliderThumb {
+export default class SliderThumb {
   private _parentId: string;
   container: HTMLElement;
   thumbSlider: HTMLElement;
@@ -19,5 +19,3 @@ class SliderThumb {
     this.thumbSlider.remove();
   }
 }
-
-export default SliderThumb;

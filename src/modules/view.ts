@@ -1,5 +1,6 @@
 import SliderBody from './sliderBody';
 import SliderThumb from './sliderThumb';
+import TipValue from './tipValue';
 
 export default class View {
   private _parentId: string;
@@ -14,6 +15,8 @@ export default class View {
     this.sliderLineId = sliderBody.init();
     const sliderThumb: SliderThumb = new SliderThumb(this.sliderLineId);
     sliderThumb.init();
+    const tipValue: TipValue = new TipValue(this.sliderLineId);
+    tipValue.init();
   }
 
   // sliderLength: number;

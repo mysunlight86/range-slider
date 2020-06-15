@@ -16,12 +16,6 @@ view.show();
 // const slider3: View = new View('');
 // slider3.hide();
 
-// const sliderThumb: SliderThumb = new SliderThumb();
-// sliderThumb.init();
-
-const tipValue: TipValue = new TipValue();
-tipValue.init();
-
 const scale: Scale = new Scale();
 scale.init();
 
