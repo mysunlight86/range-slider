@@ -20,8 +20,4 @@ export default class SliderBody {
   destroy() {
     this.bodySlider.remove();
   }
-
-  // getWidth() {
-  //   return this.bodySlider.offsetWidth;
-  // }
 }

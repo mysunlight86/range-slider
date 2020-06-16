@@ -10,17 +10,20 @@ type options = {
 };
 
 export default class Model implements Subject {
-  private _min = 0;
-  private _max = 300;
-  private _step = 50;
-  private _kind = 'horizontal';
-  private _isBasic = true;
-  constructor(options: options) {
-    this._min = options.min ? options.min : this._min;
-    this._max = options.max ? options.max : this._max;
-    this._step = options.step ? options.step : this._step;
-    this._kind = options.kind ? options.kind : this._kind;
-    this._isBasic = options.isBasic ? options.isBasic : this._isBasic;
+  private _min: number;
+  private _max: number;
+  private _step: number;
+  private _kind: string;
+  private _isBasic: boolean;
+
+  constructor(options?: options) {
+    if (!options) options = {}
+    this._min = options.min ? options.min : 0;
+    this._max = options.max ? options.max : 300;
+    this._step = options.step ? options.step : 50;
+    this._kind = options.kind ? options.kind : 'horizontal';
+    this._isBasic = options.isBasic ? options.isBasic : true;
+    // this.notify();
   }
 
   /**
@@ -36,10 +39,10 @@ export default class Model implements Subject {
   public attach(observer: Observer): void {
     const isExist = this.observers.includes(observer);
     if (isExist) {
-      return console.log('Subject: Observer has been attached already.');
+      return console.log('Model: Presenter has been attached already.');
     }
 
-    console.log('Subject: Attached an observer.');
+    console.log('Model: Attached a presenter.');
     this.observers.push(observer);
   }
 
@@ -57,13 +60,19 @@ export default class Model implements Subject {
    * Запуск обновления в каждом подписчике.
    */
   public notify(): void {
-    console.log('Subject: Notifying observers...');
+    console.log('Model: Notifying observers...');
     for (const observer of this.observers) {
       observer.update(this);
     }
   }
 
   calcUnit() {
+    console.log(`Model: My state has just changed`);
 
+    return {
+      min: this._min,
+      max: this._max,
+      step: this._step
+    };
   }
 }

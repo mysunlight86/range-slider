@@ -1,23 +1,32 @@
 import './style.scss';
 
 import sliderRun from './modules/slider';
-import SliderBody from './modules/sliderBody';
-import SliderThumb from './modules/sliderThumb';
-import TipValue from './modules/tipValue';
-import Scale from './modules/scale';
+// import Scale from './modules/scale';
 import { ConcreteSubject } from './modules/app';
 import View from './modules/view';
-import { ConcreteObserverA, ConcreteObserverB } from './modules/presenter';
+import Model from './modules/model';
+import { ConcreteObserverA, ConcreteObserverB, Presenter } from './modules/presenter';
 
 const view: View = new View('range-slider');
-view.show();
+view.showSlider();
+
+
 // const slider2: View = new View();
 // slider2.hide();
 // const slider3: View = new View('');
 // slider3.hide();
 
-const scale: Scale = new Scale();
-scale.init();
+const model = new Model();
+
+const presenter = new Presenter();
+model.attach(presenter);
+
+// presenter.modelOptions = model.calcUnit();
+presenter.transferModelData(model, view);
+// model.calcUnit();
+
+// const scale: Scale = new Scale();
+// scale.init();
 
 sliderRun();
 

@@ -23,21 +23,45 @@ class ConcreteObserverA implements Observer {
   }
 }
 
-class ModelObserver implements Observer {
+class Presenter implements Observer {
+  modelOptions: {min: number, max: number, step: number};
+
+  transferModelData(model: Model, view: View) {
+    this.modelOptions = model.calcUnit();
+    console.log(this.modelOptions);
+    view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
+    // console.log('ModelObserver: Reacted to the event.');
+    // if (model instanceof Model) {
+    //   this.modelOptions = model.calcUnit();
+    //   console.log(this.modelOptions);
+      // const view = new View();
+      // view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
+      // console.log('ModelObserver: Reacted to the event.');
+    // }
+  }
+
   // transfer() {
   //   const view: View = new View();
     // return view.getWidthSlider();
   // }
-  update(model) {
 
+  update(model: Model) {
+    console.log('ModelObserver: Reacted to the event.');
+    // if (model instanceof Model) {
+    //   this.modelOptions = model.calcUnit();
+    //   console.log(this.modelOptions);
+    //   const view = new View();
+    //   view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
+    //   console.log('ModelObserver: Reacted to the event.');
+    // }
   }
 }
 
-class ViewObserver implements Observer {
-  update(view) {
+// class ViewObserver implements Observer {
+//   update(view) {
 
-  }
-}
+//   }
+// }
 
 class ConcreteObserverB implements Observer {
   isSubjectSatisfies(subject) {
@@ -51,4 +75,4 @@ class ConcreteObserverB implements Observer {
   }
 }
 
-export { Observer, ConcreteObserverA, ConcreteObserverB };
+export { Observer, ConcreteObserverA, ConcreteObserverB, Presenter };
