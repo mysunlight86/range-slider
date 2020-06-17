@@ -1,4 +1,5 @@
-import { Subject } from './app';
+// import { Subject } from './app';
+import Subject from './app';
 import { Observer } from './presenter';
 
 type options = {

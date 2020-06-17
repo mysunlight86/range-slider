@@ -2,10 +2,11 @@ import './style.scss';
 
 import sliderRun from './modules/slider';
 // import Scale from './modules/scale';
-import { ConcreteSubject } from './modules/app';
+// import { ConcreteSubject } from './modules/app';
 import View from './modules/view';
 import Model from './modules/model';
-import { ConcreteObserverA, ConcreteObserverB, Presenter } from './modules/presenter';
+// import { ConcreteObserverA, ConcreteObserverB, Presenter } from './modules/presenter';
+import { Presenter } from './modules/presenter';
 
 const view: View = new View('range-slider');
 view.showSlider();
@@ -16,7 +17,11 @@ view.showSlider();
 // const slider3: View = new View('');
 // slider3.hide();
 
-const model = new Model();
+const model = new Model({
+  min: 40,
+  step: 60,
+  max: 260
+});
 
 const presenter = new Presenter();
 model.attach(presenter);
@@ -24,6 +29,8 @@ model.attach(presenter);
 // presenter.modelOptions = model.calcUnit();
 presenter.transferModelData(model, view);
 // model.calcUnit();
+
+// view.showSlider();
 
 // const scale: Scale = new Scale();
 // scale.init();
@@ -34,20 +41,20 @@ sliderRun();
 * Клиентский код.
 */
 
-const subject = new ConcreteSubject();
+// const subject = new ConcreteSubject();
 
-const observer1 = new ConcreteObserverA();
-subject.attach(observer1);
+// const observer1 = new ConcreteObserverA();
+// subject.attach(observer1);
 
-const observer2 = new ConcreteObserverB();
-subject.attach(observer2);
+// const observer2 = new ConcreteObserverB();
+// subject.attach(observer2);
 
-subject.someBusinessLogic();
-subject.someBusinessLogic();
+// subject.someBusinessLogic();
+// subject.someBusinessLogic();
 
-subject.detach(observer2);
+// subject.detach(observer2);
 
-subject.someBusinessLogic();
+// subject.someBusinessLogic();
 
 // const el = document.getElementById('content');
 
