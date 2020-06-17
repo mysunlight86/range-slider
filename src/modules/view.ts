@@ -10,16 +10,16 @@ export default class View {
   _maxValue: number;
   _stepValue: number;
 
-  constructor(parentId?) {
+  constructor(parentId) {
     this._parentId = parentId;
   };
 
   showSlider() {
     const sliderBody: SliderBody = new SliderBody(this._parentId);
     this.sliderLineId = sliderBody.init();
-    const sliderThumb: SliderThumb = new SliderThumb(this.sliderLineId);
+    const sliderThumb: SliderThumb = new SliderThumb(`#${this._parentId} > #${this.sliderLineId}`);
     sliderThumb.init();
-    const tipValue: TipValue = new TipValue(this.sliderLineId);
+    const tipValue: TipValue = new TipValue(`#${this._parentId} > #${this.sliderLineId}`);
     tipValue.init();
   }
 

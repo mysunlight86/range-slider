@@ -1,14 +1,14 @@
 export default class SliderThumb {
-  private _parentId: string;
+  private _selector: string;
   container: HTMLElement;
   thumbSlider: HTMLElement;
 
-  constructor(parentId) {
-    this._parentId = parentId;
+  constructor(selector: string) {
+    this._selector = selector;
   };
 
   init() {
-    this.container = document.getElementById(this._parentId);
+    this.container = document.querySelector(this._selector);
     this.thumbSlider = document.createElement('DIV');
     this.thumbSlider.classList.add('slider-thumb');
     this.thumbSlider.setAttribute('id', 'slider-thumb');

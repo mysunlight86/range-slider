@@ -37,6 +37,9 @@ presenter.transferModelData(model, view);
 
 sliderRun();
 
+const view2: View = new View('slider2');
+view2.showSlider();
+
 /**
 * Клиентский код.
 */

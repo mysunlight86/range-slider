@@ -10,6 +10,7 @@ export default class SliderBody {
 
   init() {
     this.container = document.getElementById(this._parentId);
+    this.container.style.padding = '50px 20px 20px';
     this.bodySlider = document.createElement('DIV');
     this.bodySlider.classList.add('slider-body');
     this.bodySlider.setAttribute('id', this.sliderLine);

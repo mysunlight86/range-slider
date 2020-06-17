@@ -68,7 +68,7 @@ export default class Model implements Subject {
   }
 
   calcUnit() {
-    console.log(`Model: My state has just changed`);
+    // console.log(`Model: My state has just changed`);
 
     return {
       min: this._min,

@@ -1,14 +1,14 @@
 export default class TipValue {
-  private _parentId: string;
+  private _selector: string;
   container: HTMLElement;
   tipValue: HTMLElement;
 
-  constructor(parentId) {
-    this._parentId = parentId;
+  constructor(selector: string) {
+    this._selector = selector;
   };
 
   init() {
-    this.container = document.getElementById(this._parentId);
+    this.container = document.querySelector(this._selector);
     this.tipValue = document.createElement('DIV');
     this.tipValue.classList.add('tip-value');
     this.tipValue.setAttribute('id', 'tip-value');
