@@ -1,14 +1,23 @@
-import Model from './model';
+// import Model from './model';
+
+type optionsType = {
+  min?: number,
+  max?: number,
+  step?: number,
+  kind?: string,
+  isBasic?: boolean,
+  values?: number[]
+};
 
 export default class SliderThumb {
   _selector: string;
-  _values: number[];
+  _options: optionsType;
   container: HTMLElement;
   thumbSlider: HTMLElement;
 
-  constructor(selector: string, values: number[]) {
+  constructor(selector: string, options: optionsType) {
     this._selector = selector;
-    this._values = values;
+    this._options = options;
   };
 
   init() {
@@ -19,9 +28,9 @@ export default class SliderThumb {
     // console.log(this._selector);
     // console.log(this.container);
     // this.thumbSlider.style.left = model.positionElement(this.container, this.thumbSlider, this._values[0]);
-    this.thumbSlider.style.left = `${this._values[0]}px`;
     // this.thumbSlider.setAttribute('id', 'slider-thumb');
     this.container.append(this.thumbSlider);
+    this.thumbSlider.style.left = `${(this._options.values[0] - this._options.min) * this.container.offsetWidth / (this._options.max - this._options.min) + this.container.offsetLeft - this.thumbSlider.offsetWidth / 2}px`;
   }
 
   destroy() {

@@ -29,14 +29,14 @@ export default class View {
   };
 
   positionElement(parent: HTMLElement, elem: HTMLElement, val: number) {
-    console.log(parent);
-    console.log(elem);
-    console.log(val);
-    console.log(this._minValue);
-    console.log(this._maxValue);
-    console.log(parent.offsetLeft);
-    console.log(elem.offsetWidth);
-    console.log(parent.offsetWidth);
+    // console.log(parent);
+    // console.log(elem);
+    // console.log(val);
+    // console.log(this._minValue);
+    // console.log(this._maxValue);
+    // console.log(parent.offsetLeft);
+    // console.log(elem.offsetWidth);
+    // console.log(parent.offsetWidth);
     return `${((val - this._minValue) * parent.offsetWidth / (this._maxValue - this._minValue)) + parent.offsetLeft - elem.offsetWidth / 2}px`;
   }
 
@@ -49,7 +49,7 @@ export default class View {
     // const sliderThumb: SliderThumb = new SliderThumb(`${this._selector} > #${this.sliderLineId}`, this._values);
     // console.log(this.sliderLineElem);
     // console.log(`${this._selector} > .${this.sliderLineClass}`);
-    const sliderThumb: SliderThumb = new SliderThumb(`${this._selector} > .${this.sliderLineClass}`, this._options.values);
+    const sliderThumb: SliderThumb = new SliderThumb(`${this._selector} > .${this.sliderLineClass}`, this._options);
     sliderThumb.init();
     const tipValue: TipValue = new TipValue(`${this._selector} > .${this.sliderLineClass}`);
     tipValue.init();
