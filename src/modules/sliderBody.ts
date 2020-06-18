@@ -1,19 +1,20 @@
 export default class SliderBody {
-  private _parentId: string;
+  selector: string
   container: HTMLElement;
   bodySlider: HTMLElement;
   sliderLine = 'slider-body';
 
-  constructor(parentId) {
-    this._parentId = parentId;
+  constructor(parentSelector: string) {
+    this.selector = parentSelector;
   };
 
   init() {
-    this.container = document.getElementById(this._parentId);
+    // console.log(this.selector);
+    this.container = document.querySelector(this.selector);
     this.container.style.padding = '50px 20px 20px';
     this.bodySlider = document.createElement('DIV');
-    this.bodySlider.classList.add('slider-body');
-    this.bodySlider.setAttribute('id', this.sliderLine);
+    this.bodySlider.classList.add(this.sliderLine);
+    // this.bodySlider.setAttribute('id', this.sliderLine);
     this.container.append(this.bodySlider);
     return this.sliderLine;
   }

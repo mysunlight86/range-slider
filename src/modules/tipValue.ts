@@ -11,7 +11,7 @@ export default class TipValue {
     this.container = document.querySelector(this._selector);
     this.tipValue = document.createElement('DIV');
     this.tipValue.classList.add('tip-value');
-    this.tipValue.setAttribute('id', 'tip-value');
+    // this.tipValue.setAttribute('id', 'tip-value');
     this.container.append(this.tipValue);
   }
 

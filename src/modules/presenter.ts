@@ -25,21 +25,21 @@ interface Observer {
 // }
 
 class Presenter implements Observer {
-  modelOptions: {min: number, max: number, step: number};
+  // modelOptions: {min: number, max: number, step: number};
 
-  transferModelData(model: Model, view: View) {
-    this.modelOptions = model.calcUnit();
-    console.log(this.modelOptions);
-    view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
-    // console.log('ModelObserver: Reacted to the event.');
-    // if (model instanceof Model) {
-    //   this.modelOptions = model.calcUnit();
-    //   console.log(this.modelOptions);
-      // const view = new View();
-      // view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
-      // console.log('ModelObserver: Reacted to the event.');
-    // }
-  }
+  // transferModelData(model: Model, view: View) {
+  //   this.modelOptions = model.calcUnit();
+  //   console.log(this.modelOptions);
+  //   view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
+  //   // console.log('ModelObserver: Reacted to the event.');
+  //   // if (model instanceof Model) {
+  //   //   this.modelOptions = model.calcUnit();
+  //   //   console.log(this.modelOptions);
+  //     // const view = new View();
+  //     // view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
+  //     // console.log('ModelObserver: Reacted to the event.');
+  //   // }
+  // }
 
   // transfer() {
   //   const view: View = new View();

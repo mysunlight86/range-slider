@@ -1,15 +1,25 @@
 import './style.scss';
+import Slider from './modules/slider';
 
-import sliderRun from './modules/slider';
+import sliderRun from './modules/sliderRun';
 // import Scale from './modules/scale';
 // import { ConcreteSubject } from './modules/app';
-import View from './modules/view';
+// import View from './modules/view';
 import Model from './modules/model';
 // import { ConcreteObserverA, ConcreteObserverB, Presenter } from './modules/presenter';
 import { Presenter } from './modules/presenter';
 
-const view: View = new View('range-slider');
-view.showSlider();
+const slider1: Slider = new Slider('.slider1');
+slider1.sliderStart();
+
+const slider2: Slider = new Slider('.slider2', {min: 40, step: 60, max: 245});
+slider2.sliderStart();
+
+const slider3: Slider = new Slider('.slider3', {values: [256]});
+slider3.sliderStart();
+
+// const view: View = new View('range-slider');
+// view.showSlider();
 
 
 // const slider2: View = new View();
@@ -17,17 +27,17 @@ view.showSlider();
 // const slider3: View = new View('');
 // slider3.hide();
 
-const model = new Model({
-  min: 40,
-  step: 60,
-  max: 260
-});
+// const model = new Model({
+//   min: 40,
+//   step: 60,
+//   max: 260
+// });
 
-const presenter = new Presenter();
-model.attach(presenter);
+// const presenter = new Presenter();
+// model.attach(presenter);
 
 // presenter.modelOptions = model.calcUnit();
-presenter.transferModelData(model, view);
+// presenter.transferModelData(model, view);
 // model.calcUnit();
 
 // view.showSlider();
@@ -35,10 +45,10 @@ presenter.transferModelData(model, view);
 // const scale: Scale = new Scale();
 // scale.init();
 
-sliderRun();
+// sliderRun();
 
-const view2: View = new View('slider2');
-view2.showSlider();
+// const view2: View = new View('slider2');
+// view2.showSlider();
 
 /**
 * Клиентский код.

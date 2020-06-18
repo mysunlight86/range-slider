@@ -1,52 +1,51 @@
-function sliderRun() {
-  const slider = document.getElementById('slider-body');
-  const thumb = document.getElementById('slider-thumb');
-  const tip = document.getElementById('tip-value');
+import View from './view';
 
-  const delta = thumb.offsetWidth / 2;
-  tip.textContent = `${Number(getComputedStyle(thumb).left.slice(0, -2)) + delta}`;
+type optionsType = {
+  min?: number,
+  max?: number,
+  step?: number,
+  kind?: string,
+  isBasic?: boolean,
+  values?: number[]
+};
 
-  function fillSliderLine(length) {
-    slider.style.background = `linear-gradient(to right, red ${length}px, #e5e5e5 ${length}px)`;
+export default class Slider {
+  _selector: string;
+  _options: optionsType;
+
+  _min: number;
+  _max: number;
+  _step: number;
+  _kind: string;
+  _isBasic: boolean;
+  _values: number[];
+
+  constructor(selector: string, options?: optionsType) {
+    this._selector = selector;
+    if (!options) options = {}
+    this._min = options.min ? options.min : 0;
+    this._max = options.max ? options.max : 300;
+    this._step = options.step ? options.step : 57;
+    this._kind = options.kind ? options.kind : 'horizontal';
+    this._isBasic = options.isBasic ? options.isBasic : true;
+    this._values = options.values ? options.values : [38];
   }
 
-  function onMouseMove(event: MouseEvent): void {
-    let thumbPoint = event.clientX - slider.getBoundingClientRect().left - delta;
+  sliderStart() {
+    this._options = {
+      min: this._min,
+      max: this._max,
+      step: this._step,
+      kind: this._kind,
+      isBasic: this._isBasic,
+      values: this._values
+    };
+    console.log(this._options);
+    // if (this._isBasic) {
 
-    // курсор вышел из слайдера => оставить бегунок в его границах.
-    if (thumbPoint < -delta) {
-      thumbPoint = -delta;
-    }
-    const rightEdge = slider.offsetWidth - delta;
-    if (thumbPoint > rightEdge) {
-      thumbPoint = rightEdge;
-    }
-
-    thumb.style.left = `${thumbPoint}px`;
-    tip.textContent = `${thumbPoint + delta}`;
-    tip.style.left = `${thumbPoint - (tip.offsetWidth - thumb.offsetWidth) / 2}px`;
-    fillSliderLine(thumbPoint + delta);
+    // }
+    // console.log(this._selector);
+    const view: View = new View(this._selector, this._options);
+    view.showSlider();
   }
-
-  function onMouseUp(): void {
-    document.removeEventListener('mouseup', onMouseUp);
-    document.removeEventListener('mousemove', onMouseMove);
-  }
-
-  function onMouseDown(event: MouseEvent): void {
-    event.preventDefault();
-
-    document.addEventListener('mousemove', onMouseMove);
-    document.addEventListener('mouseup', onMouseUp);
-  }
-
-  function returnFalse() {
-    return false;
-  }
-
-  thumb.addEventListener('mousedown', onMouseDown);
-  slider.addEventListener('click', onMouseMove);
-  thumb.addEventListener('dragstart', returnFalse);
 }
-
-export default sliderRun;

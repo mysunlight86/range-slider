@@ -67,13 +67,13 @@ export default class Model implements Subject {
     }
   }
 
-  calcUnit() {
-    // console.log(`Model: My state has just changed`);
+  // calcUnit() {
+  //   console.log(`Model: My state has just changed`);
 
-    return {
-      min: this._min,
-      max: this._max,
-      step: this._step
-    };
-  }
+  //   return {
+  //     min: this._min,
+  //     max: this._max,
+  //     step: this._step
+  //   };
+  // }
 }
