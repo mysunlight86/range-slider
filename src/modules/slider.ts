@@ -1,4 +1,6 @@
-import View from './view';
+// import View from './view';
+import { Presenter } from './presenter';
+import Model from './model';
 
 type optionsType = {
   min?: number,
@@ -28,10 +30,18 @@ export default class Slider {
     this._step = options.step ? options.step : 57;
     this._kind = options.kind ? options.kind : 'horizontal';
     this._isBasic = options.isBasic ? options.isBasic : true;
-    this._values = options.values ? options.values : [38];
+    this._values = options.values ? options.values : [this._step];
   }
 
-  sliderStart() {
+  init() {
+    const model: Model = new Model();
+    const presenter = new Presenter();
+    model.attach(presenter);
+    this.setData();
+    model.getData(this._options);
+  }
+
+  setData() {
     this._options = {
       min: this._min,
       max: this._max,
@@ -45,7 +55,10 @@ export default class Slider {
 
     // }
     // console.log(this._selector);
-    const view: View = new View(this._selector, this._options);
-    view.showSlider();
+    // const view: View = new View(this._selector, this._options);
+    // view.showSlider();
+
+    // const presenter: Presenter = new Presenter(this._selector, this._options);
+    // presenter.setDataToModel();
   }
 }

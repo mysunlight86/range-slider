@@ -1,8 +1,18 @@
 // import { Subject, ConcreteSubject } from './app';
 import Subject from './app';
-import SliderBody from './sliderBody';
+// import SliderBody from './sliderBody';
 import Model from './model';
 import View from './view';
+
+type optionsType = {
+  min?: number,
+  max?: number,
+  step?: number,
+  kind?: string,
+  isBasic?: boolean,
+  values?: number[]
+};
+
 /**
 * Интерфейс Наблюдателя объявляет метод уведомления, который издатели
 * используют для оповещения своих подписчиков.
@@ -26,6 +36,18 @@ interface Observer {
 
 class Presenter implements Observer {
   // modelOptions: {min: number, max: number, step: number};
+  _selector;
+  _options;
+
+  // constructor(selector?: string, options?: optionsType) {
+  //   this._selector = selector;
+  //   this._options = options;
+  // }
+
+  // setDataToModel() {
+  //   const model: Model = new Model();
+  //   model.getData();
+  // }
 
   // transferModelData(model: Model, view: View) {
   //   this.modelOptions = model.calcUnit();

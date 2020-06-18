@@ -8,6 +8,7 @@ type options = {
   step?: number;
   kind?: string;
   isBasic?: boolean;
+  values?: number[];
 };
 
 export default class Model implements Subject {
@@ -16,16 +17,17 @@ export default class Model implements Subject {
   private _step: number;
   private _kind: string;
   private _isBasic: boolean;
+  private _values: number[];
 
-  constructor(options?: options) {
-    if (!options) options = {}
-    this._min = options.min ? options.min : 0;
-    this._max = options.max ? options.max : 300;
-    this._step = options.step ? options.step : 50;
-    this._kind = options.kind ? options.kind : 'horizontal';
-    this._isBasic = options.isBasic ? options.isBasic : true;
+  // constructor(options?: options) {
+  //   if (!options) options = {}
+  //   this._min = options.min ? options.min : 0;
+  //   this._max = options.max ? options.max : 300;
+  //   this._step = options.step ? options.step : 50;
+  //   this._kind = options.kind ? options.kind : 'horizontal';
+  //   this._isBasic = options.isBasic ? options.isBasic : true;
     // this.notify();
-  }
+  // }
 
   /**
    * @type {Observer[]} Список подписчиков. В реальной жизни список
@@ -65,6 +67,17 @@ export default class Model implements Subject {
     for (const observer of this.observers) {
       observer.update(this);
     }
+  }
+
+  getData(options: options) {
+    this._min = options.min;
+    this._max = options.max;
+    this._step = options.step;
+    this._kind = options.kind;
+    this._isBasic = options.isBasic;
+    this._values = options.values;
+    console.log(`Model: My state has just changed`);
+    this.notify();
   }
 
   // calcUnit() {
