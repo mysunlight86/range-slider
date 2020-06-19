@@ -9,13 +9,13 @@ import Slider from './modules/slider';
 // import { ConcreteObserverA, ConcreteObserverB, Presenter } from './modules/presenter';
 // import { Presenter } from './modules/presenter';
 
-const slider1: Slider = new Slider('.slider1');
+const slider1: Slider = new Slider('#slider1');
 slider1.init();
 
-const slider2: Slider = new Slider('.slider2', {min: 40, step: 60, max: 245});
+const slider2: Slider = new Slider('#slider2', {min: 40, step: 60, max: 245});
 slider2.init();
 
-const slider3: Slider = new Slider('.slider3', {values: [256]});
+const slider3: Slider = new Slider('#slider3', {values: [256]});
 slider3.init();
 
 // const view: View = new View('range-slider');

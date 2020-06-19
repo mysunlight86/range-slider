@@ -22,8 +22,8 @@ export default class Slider {
   _isBasic: boolean;
   _values: number[];
 
-  constructor(selector: string, options?: optionsType) {
-    this._selector = selector;
+  constructor(elemId: string, options?: optionsType) {
+    this._selector = elemId;
     if (!options) options = {}
     this._min = options.min ? options.min : 0;
     this._max = options.max ? options.max : 300;
@@ -38,7 +38,7 @@ export default class Slider {
     const presenter = new Presenter();
     model.attach(presenter);
     this.setData();
-    model.getData(this._options);
+    model.setData(this._options, this._selector);
   }
 
   setData() {

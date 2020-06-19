@@ -18,6 +18,7 @@ export default class Model implements Subject {
   private _kind: string;
   private _isBasic: boolean;
   private _values: number[];
+  _selector: string;
 
   // constructor(options?: options) {
   //   if (!options) options = {}
@@ -65,19 +66,32 @@ export default class Model implements Subject {
   public notify(): void {
     console.log('Model: Notifying observers...');
     for (const observer of this.observers) {
-      observer.update(this);
+      observer.communicate(this);
     }
   }
 
-  getData(options: options) {
+  setData(options: options, selector: string) {
     this._min = options.min;
     this._max = options.max;
     this._step = options.step;
     this._kind = options.kind;
     this._isBasic = options.isBasic;
     this._values = options.values;
+    this._selector = selector;
     console.log(`Model: My state has just changed`);
     this.notify();
+  }
+
+  getData() {
+    return {
+      min: this._min,
+      max: this._max,
+      step: this._step,
+      kind: this._kind,
+      isBasic: this._isBasic,
+      values: this._values,
+      selector: this._selector
+    }
   }
 
   // calcUnit() {

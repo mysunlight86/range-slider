@@ -19,7 +19,7 @@ type optionsType = {
 */
 interface Observer {
   // Получить обновление от субъекта.
-  update(subject: Subject): void;
+  communicate(subject: Subject): void;
 }
 
 /**
@@ -36,8 +36,8 @@ interface Observer {
 
 class Presenter implements Observer {
   // modelOptions: {min: number, max: number, step: number};
-  _selector;
-  _options;
+  _selector: string;
+  _options: optionsType;
 
   // constructor(selector?: string, options?: optionsType) {
   //   this._selector = selector;
@@ -68,7 +68,14 @@ class Presenter implements Observer {
     // return view.getWidthSlider();
   // }
 
-  update(model: Model) {
+  communicate(model: Model) {
+    this._selector = model._selector;
+    this._options = model.getData();
+    console.log(this._selector);
+    console.log(this._options);
+    const view: View = new View(this._selector, this._options);
+    view.init();
+    view.showSliderLine();
     console.log('ModelObserver: Reacted to the event.');
     // if (model instanceof Model) {
     //   this.modelOptions = model.calcUnit();
@@ -78,6 +85,13 @@ class Presenter implements Observer {
     //   console.log('ModelObserver: Reacted to the event.');
     // }
   }
+
+  // getSliderData() {
+  //   return {
+  //     selector: this._selector,
+  //     options: this._options
+  //   };
+  // }
 }
 
 // class ViewObserver implements Observer {

@@ -13,12 +13,17 @@ div {
 //   padding: 50px 20px 20px;
 // }
 
+.wrapper {
+  width: 400px;
+}
+
 .slider-body {
   width: 100%;
   height: 6px;
   background-color: #e5e5e5;
-  background: linear-gradient(to right, red 100px, #e5e5e5 100px);
+  // background: linear-gradient(to right, red 100px, #e5e5e5 100px);
   border-radius: 5px;
+  margin: 50px;
 }
 
 // .fill-slider-line {
