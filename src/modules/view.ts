@@ -1,4 +1,3 @@
-// import TipValue from './tipValue';
 import Scale from './scale';
 
 type optionsType = {
@@ -16,15 +15,10 @@ export default class View {
   lineElem: HTMLElement;
   thumbElem: HTMLElement;
   valueElem: HTMLElement;
-  // _minValue: number;
-  // _maxValue: number;
-  // _stepValue: number;
-  // _values: number[];
 
   constructor(elemId: string, options: optionsType) {
     this._elemId = elemId.slice(1);
     this._options = options;
-    // this._minValue =
   };
 
   init() {
@@ -37,17 +31,25 @@ export default class View {
     this.lineElem.classList.add('slider-body');
   }
 
+  getPositionElement(elem: HTMLElement, val: number) {
+    return `${(val - this._options.min) * this.lineElem.offsetWidth / (this._options.max - this._options.min) - elem.offsetWidth / 2}px`;
+  }
+
   showSliderThumb() {
     this.thumbElem.classList.add('slider-thumb');
     this.lineElem.append(this.thumbElem);
-    this.thumbElem.style.left = `${(this._options.values[0] - this._options.min) * this.lineElem.offsetWidth / (this._options.max - this._options.min) - this.thumbElem.offsetWidth / 2}px`;
+    this.thumbElem.style.left = this.getPositionElement(this.thumbElem, this._options.values[0]);
+  }
+
+  fillSliderLine() {
+    this.lineElem.style.background = `linear-gradient(to right, red ${length}px, #e5e5e5 ${length}px)`;
   }
 
   showSliderValue() {
     this.valueElem.classList.add('tip-value');
     this.lineElem.append(this.valueElem);
     this.valueElem.textContent = `${Math.round((this.thumbElem.offsetLeft + this.thumbElem.offsetWidth / 2 - this.lineElem.offsetLeft) * (this._options.max - this._options.min) / this.lineElem.offsetWidth + this._options.min)}`;
-    this.valueElem.style.left = `${(Number(this.valueElem.textContent) - this._options.min) * this.lineElem.offsetWidth / (this._options.max - this._options.min) - this.valueElem.offsetWidth / 2}px`;
+    this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
   }
 
   // showSlider() {
