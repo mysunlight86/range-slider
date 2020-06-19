@@ -52,21 +52,6 @@ export default class View {
     this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
   }
 
-  // showSlider() {
-  //   const sliderBody: SliderBody = new SliderBody(this._selector);
-  //   this.sliderLineClass = sliderBody.init();
-  //   // this.sliderLineElem = sliderBody.init().elemSliderLine;
-  //   // console.log(this._values);
-  //   // console.log(this._options.values);
-  //   // const sliderThumb: SliderThumb = new SliderThumb(`${this._selector} > #${this.sliderLineId}`, this._values);
-  //   // console.log(this.sliderLineElem);
-  //   // console.log(`${this._selector} > .${this.sliderLineClass}`);
-  //   const sliderThumb: SliderThumb = new SliderThumb(`${this._selector} > .${this.sliderLineClass}`, this._options);
-  //   sliderThumb.init();
-  //   const tipValue: TipValue = new TipValue(`${this._selector} > .${this.sliderLineClass}`);
-  //   tipValue.init();
-  // }
-
   // showScale(min: number, max: number, step: number) {
   //   this._minValue = min;
   //   this._maxValue = max;

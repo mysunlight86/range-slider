@@ -1,6 +1,5 @@
 // import { Subject, ConcreteSubject } from './app';
 import Subject from './app';
-// import SliderBody from './sliderBody';
 import Model from './model';
 import View from './view';
 

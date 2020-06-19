@@ -1,4 +1,3 @@
-// import View from './view';
 import { Presenter } from './presenter';
 import Model from './model';
 
@@ -50,15 +49,5 @@ export default class Slider {
       isBasic: this._isBasic,
       values: this._values
     };
-    console.log(this._options);
-    // if (this._isBasic) {
-
-    // }
-    // console.log(this._selector);
-    // const view: View = new View(this._selector, this._options);
-    // view.showSlider();
-
-    // const presenter: Presenter = new Presenter(this._selector, this._options);
-    // presenter.setDataToModel();
   }
 }

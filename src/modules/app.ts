@@ -1,20 +1,5 @@
 import { Observer } from './presenter';
 
-type options = {
-  min?: number;
-  max?: number;
-  step?: number;
-  kind?: string;
-  isBasic?: boolean;
-  values?: number[];
-};
-
-/* eslint-disable object-curly-newline */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable consistent-return */
-/* eslint-disable max-classes-per-file */
-
 // class User {
 //   name: string;
 //   age: number;

@@ -21,39 +21,6 @@
         "@typescript-eslint",
         "fsd"
     ],
-    "overrides": [
-        {
-            "files": []
-            // "files": ["*.md"],
-            // "processor": "a-plugin/markdown"
-        }
-    ],
-    "rules": {
-        // "import/extensions": "off",
-        "lines-between-class-members": [
-            "error", "always",
-            { "exceptAfterSingleLine": true }
-        ],
-        "no-console": "off",
-        "func-names": ["error", "never"],
-        "no-shadow": "off",
-        // "no-undef": "off",
-        "max-len": [
-          "error",
-          {
-            "code": 120,
-            "ignoreUrls": true
-          }
-        ],
-        "no-plusplus": [
-            "error",
-            { "allowForLoopAfterthoughts": true }
-        ],
-        "no-underscore-dangle": [
-            "error",
-            { "allowAfterThis": true }
-        ]
-    },
     "settings": {
         "import/resolver": {
             "node": {

@@ -1,6 +1,6 @@
 
-import SliderBody from '../src/modules/sliderBody';
-import SliderThumb from '../src/modules/sliderThumb';
+// import SliderBody from '../src/modules/sliderBody';
+// import SliderThumb from '../src/modules/sliderThumb';
 
 describe('Slider', () => {
   // it('can create slider line', () => {

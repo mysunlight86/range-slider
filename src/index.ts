@@ -18,30 +18,6 @@ slider2.init();
 const slider3: Slider = new Slider('#slider3', {values: [300]});
 slider3.init();
 
-// const view: View = new View('range-slider');
-// view.showSlider();
-
-
-// const slider2: View = new View();
-// slider2.hide();
-// const slider3: View = new View('');
-// slider3.hide();
-
-// const model = new Model({
-//   min: 40,
-//   step: 60,
-//   max: 260
-// });
-
-// const presenter = new Presenter();
-// model.attach(presenter);
-
-// presenter.modelOptions = model.calcUnit();
-// presenter.transferModelData(model, view);
-// model.calcUnit();
-
-// view.showSlider();
-
 // const scale: Scale = new Scale();
 // scale.init();
 
