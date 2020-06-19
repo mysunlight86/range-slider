@@ -15,7 +15,7 @@ slider1.init();
 const slider2: Slider = new Slider('#slider2', {min: 40, step: 60, max: 245});
 slider2.init();
 
-const slider3: Slider = new Slider('#slider3', {values: [256]});
+const slider3: Slider = new Slider('#slider3', {values: [300]});
 slider3.init();
 
 // const view: View = new View('range-slider');

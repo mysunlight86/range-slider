@@ -71,11 +71,10 @@ class Presenter implements Observer {
   communicate(model: Model) {
     this._selector = model._selector;
     this._options = model.getData();
-    console.log(this._selector);
-    console.log(this._options);
     const view: View = new View(this._selector, this._options);
     view.init();
     view.showSliderLine();
+    view.showSliderThumb();
     console.log('ModelObserver: Reacted to the event.');
     // if (model instanceof Model) {
     //   this.modelOptions = model.calcUnit();

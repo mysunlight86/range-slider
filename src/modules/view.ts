@@ -1,5 +1,4 @@
-import SliderBody from './sliderBody';
-import SliderThumb from './sliderThumb';
+// import SliderThumb from './sliderThumb';
 import TipValue from './tipValue';
 import Scale from './scale';
 
@@ -15,12 +14,12 @@ type optionsType = {
 export default class View {
   _elemId: string;
   _options: optionsType;
-  // sliderLineClass: string;
-  sliderLineElem: HTMLElement;
-  _minValue: number;
-  _maxValue: number;
-  _stepValue: number;
-  _values: number[];
+  lineElem: HTMLElement;
+  thumbElem: HTMLElement;
+  // _minValue: number;
+  // _maxValue: number;
+  // _stepValue: number;
+  // _values: number[];
 
   constructor(elemId: string, options: optionsType) {
     this._elemId = elemId.slice(1);
@@ -29,15 +28,19 @@ export default class View {
   };
 
   init() {
-    this.sliderLineElem = document.getElementById(this._elemId);
-    console.log(this._elemId);
+    this.lineElem = document.getElementById(this._elemId);
+    this.thumbElem = document.createElement('DIV');
   }
 
   showSliderLine() {
-    // this.sliderLineElem = document.getElementById(this._elemId);
-    // console.log(this._elemId);
-    // this.sliderLineElem.style.margin = '50px';
-    this.sliderLineElem.classList.add('slider-body')
+    this.lineElem.classList.add('slider-body');
+  }
+
+  showSliderThumb() {
+    this.thumbElem.classList.add('slider-thumb');
+    this.lineElem.append(this.thumbElem);
+    this.thumbElem.style.left = `${(this._options.values[0] - this._options.min) * this.lineElem.offsetWidth / (this._options.max - this._options.min) - this.thumbElem.offsetWidth / 2}px`;
+    console.log(this._options.values);
   }
 
   // positionElement(parent: HTMLElement, elem: HTMLElement, val: number) {
