@@ -75,6 +75,7 @@ class Presenter implements Observer {
     view.init();
     view.showSliderLine();
     view.showSliderThumb();
+    view.showSliderValue();
     console.log('ModelObserver: Reacted to the event.');
     // if (model instanceof Model) {
     //   this.modelOptions = model.calcUnit();

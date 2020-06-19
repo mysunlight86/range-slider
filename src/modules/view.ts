@@ -1,5 +1,4 @@
-// import SliderThumb from './sliderThumb';
-import TipValue from './tipValue';
+// import TipValue from './tipValue';
 import Scale from './scale';
 
 type optionsType = {
@@ -16,6 +15,7 @@ export default class View {
   _options: optionsType;
   lineElem: HTMLElement;
   thumbElem: HTMLElement;
+  valueElem: HTMLElement;
   // _minValue: number;
   // _maxValue: number;
   // _stepValue: number;
@@ -30,6 +30,7 @@ export default class View {
   init() {
     this.lineElem = document.getElementById(this._elemId);
     this.thumbElem = document.createElement('DIV');
+    this.valueElem = document.createElement('DIV');
   }
 
   showSliderLine() {
@@ -40,20 +41,14 @@ export default class View {
     this.thumbElem.classList.add('slider-thumb');
     this.lineElem.append(this.thumbElem);
     this.thumbElem.style.left = `${(this._options.values[0] - this._options.min) * this.lineElem.offsetWidth / (this._options.max - this._options.min) - this.thumbElem.offsetWidth / 2}px`;
-    console.log(this._options.values);
   }
 
-  // positionElement(parent: HTMLElement, elem: HTMLElement, val: number) {
-  //   // console.log(parent);
-  //   // console.log(elem);
-  //   // console.log(val);
-  //   // console.log(this._minValue);
-  //   // console.log(this._maxValue);
-  //   // console.log(parent.offsetLeft);
-  //   // console.log(elem.offsetWidth);
-  //   // console.log(parent.offsetWidth);
-  //   return `${((val - this._minValue) * parent.offsetWidth / (this._maxValue - this._minValue)) + parent.offsetLeft - elem.offsetWidth / 2}px`;
-  // }
+  showSliderValue() {
+    this.valueElem.classList.add('tip-value');
+    this.lineElem.append(this.valueElem);
+    this.valueElem.textContent = `${Math.round((this.thumbElem.offsetLeft + this.thumbElem.offsetWidth / 2 - this.lineElem.offsetLeft) * (this._options.max - this._options.min) / this.lineElem.offsetWidth + this._options.min)}`;
+    this.valueElem.style.left = `${(Number(this.valueElem.textContent) - this._options.min) * this.lineElem.offsetWidth / (this._options.max - this._options.min) - this.valueElem.offsetWidth / 2}px`;
+  }
 
   // showSlider() {
   //   const sliderBody: SliderBody = new SliderBody(this._selector);
@@ -77,17 +72,5 @@ export default class View {
   //   // console.log(this._parentId);
   //   const scale: Scale = new Scale(this._selector, this._minValue, this._maxValue, this._stepValue);
   //   scale.init();
-  // }
-
-  // sliderLength: number;
-  // init() {
-  //   const sliderBody: SliderBody = new SliderBody();
-  //   sliderBody.init();
-  // }
-
-  // getWidthSlider() {
-  //   const sliderBody: SliderBody = new SliderBody();
-  //   this.sliderLength = sliderBody.getWidth();
-  //   return this.sliderLength;
   // }
 }
