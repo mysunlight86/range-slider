@@ -1,4 +1,4 @@
-import Scale from './scale';
+// import Scale from './scale';
 
 type optionsType = {
   min?: number,
@@ -19,7 +19,7 @@ export default class View {
   constructor(elemId: string, options: optionsType) {
     this._elemId = elemId.slice(1);
     this._options = options;
-  };
+  }
 
   init() {
     this.lineElem = document.getElementById(this._elemId);
@@ -32,23 +32,28 @@ export default class View {
   }
 
   getPositionElement(elem: HTMLElement, val: number) {
-    return `${(val - this._options.min) * this.lineElem.offsetWidth / (this._options.max - this._options.min) - elem.offsetWidth / 2}px`;
+    return `${((val - this._options.min) * this.lineElem.offsetWidth)
+      / (this._options.max - this._options.min) - elem.offsetWidth / 2}px`;
+  }
+
+  fillSliderLine(length: number) {
+    this.lineElem.style.background = `linear-gradient(to right, red ${length}px, #e5e5e5 ${length}px)`;
   }
 
   showSliderThumb() {
     this.thumbElem.classList.add('slider-thumb');
     this.lineElem.append(this.thumbElem);
     this.thumbElem.style.left = this.getPositionElement(this.thumbElem, this._options.values[0]);
-  }
-
-  fillSliderLine() {
-    this.lineElem.style.background = `linear-gradient(to right, red ${length}px, #e5e5e5 ${length}px)`;
+    this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
   }
 
   showSliderValue() {
     this.valueElem.classList.add('tip-value');
     this.lineElem.append(this.valueElem);
-    this.valueElem.textContent = `${Math.round((this.thumbElem.offsetLeft + this.thumbElem.offsetWidth / 2 - this.lineElem.offsetLeft) * (this._options.max - this._options.min) / this.lineElem.offsetWidth + this._options.min)}`;
+    this.valueElem.textContent = `${Math.round(((this.thumbElem.offsetLeft
+       + this.thumbElem.offsetWidth / 2 - this.lineElem.offsetLeft)
+       * (this._options.max - this._options.min))
+       / this.lineElem.offsetWidth + this._options.min)}`;
     this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
   }
 

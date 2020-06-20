@@ -27,5 +27,23 @@
                 "extensions": [".js", ".ts"]
             }
         }
+    },
+    "rules": {
+        "linebreak-style": [2, "windows"],
+        "max-len": [
+            "error",
+            {
+              "code": 120,
+              "ignoreUrls": true
+            }
+          ],
+          "no-underscore-dangle": [
+              "error",
+              { "allowAfterThis": true }
+          ],
+          "lines-between-class-members": [
+              "error", "always",
+              { "exceptAfterSingleLine": true }
+          ]
     }
 }
