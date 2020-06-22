@@ -14,32 +14,23 @@ export default class Slider {
   _selector: string;
   _options: optionsType;
 
-  _min: number;
-  _max: number;
-  _step: number;
-  _kind: string;
-  _isBasic: boolean;
-  _values: number[];
+  _min = 0;
+  _max = 300;
+  _step = 57;
+  _kind = 'horizontal';
+  _isBasic = true;
+  _values = [this._step];
 
   constructor(elemId: string, options?: optionsType) {
     this._selector = elemId;
-    if (!options) {
-      this._options = {};
+    if (options) {
+      this._min = options.min ? options.min : this._min;
+      this._max = options.max ? options.max : this._max;
+      this._step = options.step ? options.step : this._step;
+      this._kind = options.kind ? options.kind : this._kind;
+      this._isBasic = options.isBasic ? options.isBasic : this._isBasic;
+      this._values = options.values ? options.values : [this._step];
     }
-    this._min = options.min ? options.min : 0;
-    this._max = options.max ? options.max : 300;
-    this._step = options.step ? options.step : 57;
-    this._kind = options.kind ? options.kind : 'horizontal';
-    this._isBasic = options.isBasic ? options.isBasic : true;
-    this._values = options.values ? options.values : [this._step];
-  }
-
-  init() {
-    const model: Model = new Model();
-    const presenter = new Presenter();
-    model.attach(presenter);
-    this.setData();
-    model.setData(this._options, this._selector);
   }
 
   setData() {
@@ -51,5 +42,14 @@ export default class Slider {
       isBasic: this._isBasic,
       values: this._values,
     };
+  }
+
+  init() {
+    const model: Model = new Model();
+    const presenter = new Presenter();
+    model.attach(presenter);
+    this.setData();
+    console.log(this._options);
+    model.setData(this._options, this._selector);
   }
 }

@@ -43,6 +43,8 @@ export default class View {
   showSliderThumb() {
     this.thumbElem.classList.add('slider-thumb');
     this.lineElem.append(this.thumbElem);
+    console.log(this._options);
+    // console.log(this._options.values[0]);
     this.thumbElem.style.left = this.getPositionElement(this.thumbElem, this._options.values[0]);
     this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
   }
