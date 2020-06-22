@@ -1,5 +1,6 @@
-// import { Subject } from './app';
+// eslint-disable-next-line no-unused-vars
 import Subject from './app';
+// eslint-disable-next-line no-unused-vars
 import { Observer } from './presenter';
 
 type options = {
@@ -27,7 +28,7 @@ export default class Model implements Subject {
   //   this._step = options.step ? options.step : 50;
   //   this._kind = options.kind ? options.kind : 'horizontal';
   //   this._isBasic = options.isBasic ? options.isBasic : true;
-    // this.notify();
+  // this.notify();
   // }
 
   /**
@@ -43,7 +44,7 @@ export default class Model implements Subject {
   public attach(observer: Observer): void {
     const isExist = this.observers.includes(observer);
     if (isExist) {
-      return console.log('Model: Presenter has been attached already.');
+      console.log('Model: Presenter has been attached already.');
     }
 
     console.log('Model: Attached a presenter.');
@@ -53,7 +54,7 @@ export default class Model implements Subject {
   public detach(observer: Observer): void {
     const observerIndex = this.observers.indexOf(observer);
     if (observerIndex === -1) {
-      return console.log('Subject: Nonexistent observer.');
+      console.log('Subject: Nonexistent observer.');
     }
 
     this.observers.splice(observerIndex, 1);
@@ -65,6 +66,7 @@ export default class Model implements Subject {
    */
   public notify(): void {
     console.log('Model: Notifying observers...');
+    // eslint-disable-next-line no-restricted-syntax
     for (const observer of this.observers) {
       observer.communicate(this);
     }
@@ -78,8 +80,12 @@ export default class Model implements Subject {
     this._isBasic = options.isBasic;
     this._values = options.values;
     this._selector = selector;
-    console.log(`Model: My state has just changed`);
+    console.log('Model: My state has just changed');
     this.notify();
+  }
+
+  getSelector() {
+    return this._selector;
   }
 
   getData() {
@@ -90,17 +96,6 @@ export default class Model implements Subject {
       kind: this._kind,
       isBasic: this._isBasic,
       values: this._values,
-      selector: this._selector
-    }
+    };
   }
-
-  // calcUnit() {
-  //   console.log(`Model: My state has just changed`);
-
-  //   return {
-  //     min: this._min,
-  //     max: this._max,
-  //     step: this._step
-  //   };
-  // }
 }

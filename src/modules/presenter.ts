@@ -1,5 +1,6 @@
-// import { Subject, ConcreteSubject } from './app';
+// eslint-disable-next-line no-unused-vars
 import Subject from './app';
+// eslint-disable-next-line no-unused-vars
 import Model from './model';
 import View from './view';
 
@@ -38,37 +39,8 @@ class Presenter implements Observer {
   _selector: string;
   _options: optionsType;
 
-  // constructor(selector?: string, options?: optionsType) {
-  //   this._selector = selector;
-  //   this._options = options;
-  // }
-
-  // setDataToModel() {
-  //   const model: Model = new Model();
-  //   model.getData();
-  // }
-
-  // transferModelData(model: Model, view: View) {
-  //   this.modelOptions = model.calcUnit();
-  //   console.log(this.modelOptions);
-  //   view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
-  //   // console.log('ModelObserver: Reacted to the event.');
-  //   // if (model instanceof Model) {
-  //   //   this.modelOptions = model.calcUnit();
-  //   //   console.log(this.modelOptions);
-  //     // const view = new View();
-  //     // view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
-  //     // console.log('ModelObserver: Reacted to the event.');
-  //   // }
-  // }
-
-  // transfer() {
-  //   const view: View = new View();
-    // return view.getWidthSlider();
-  // }
-
   communicate(model: Model) {
-    this._selector = model._selector;
+    this._selector = model.getSelector();
     this._options = model.getData();
     const view: View = new View(this._selector, this._options);
     view.init();
@@ -76,21 +48,7 @@ class Presenter implements Observer {
     view.showSliderThumb();
     view.showSliderValue();
     console.log('ModelObserver: Reacted to the event.');
-    // if (model instanceof Model) {
-    //   this.modelOptions = model.calcUnit();
-    //   console.log(this.modelOptions);
-    //   const view = new View();
-    //   view.showScale(this.modelOptions.min, this.modelOptions.max, this.modelOptions.step);
-    //   console.log('ModelObserver: Reacted to the event.');
-    // }
   }
-
-  // getSliderData() {
-  //   return {
-  //     selector: this._selector,
-  //     options: this._options
-  //   };
-  // }
 }
 
 // class ViewObserver implements Observer {
@@ -112,4 +70,5 @@ class Presenter implements Observer {
 // }
 
 // export { Observer, ConcreteObserverA, ConcreteObserverB, Presenter };
+// eslint-disable-next-line no-undef
 export { Observer, Presenter };

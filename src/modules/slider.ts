@@ -23,7 +23,9 @@ export default class Slider {
 
   constructor(elemId: string, options?: optionsType) {
     this._selector = elemId;
-    if (!options) options = {}
+    if (!options) {
+      this._options = {};
+    }
     this._min = options.min ? options.min : 0;
     this._max = options.max ? options.max : 300;
     this._step = options.step ? options.step : 57;
@@ -47,7 +49,7 @@ export default class Slider {
       step: this._step,
       kind: this._kind,
       isBasic: this._isBasic,
-      values: this._values
+      values: this._values,
     };
   }
 }

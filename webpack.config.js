@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'inline-source-map',
   mode: 'development',
   entry: {
-    main: './src/index'
+    main: './src/index',
   },
   resolve: {
     extensions: ['.ts', '.js'],
@@ -15,13 +15,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, './dist'),
     filename: '[name].js',
-    publicPath: '/dist'
+    publicPath: '/dist',
   },
   devServer: {
     contentBase: path.join(__dirname, './dist'),
     compress: true,
     hot: true,
-    overlay: true
+    overlay: true,
   },
   module: {
     rules: [
@@ -42,8 +42,8 @@ module.exports = {
           'css-loader',
           'sass-loader',
         ],
-      }
-    ]
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -52,6 +52,6 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: 'css/style.css',
-    })
-  ]
+    }),
+  ],
 };

@@ -55,10 +55,14 @@ export default class Scale {
       this.max.insertAdjacentElement('beforebegin', this.elem);
       if (Number(this.elem.textContent) < 100) {
         // this.elem.style.left = `${Number(this.elem.textContent) * this.scale.offsetWidth / this._max + 20}px`;
-        this.elem.style.left = `${((Number(this.elem.textContent) - this._min) * this.scale.offsetWidth / (this._max - this._min)) + this.scale.offsetLeft - this.elem.offsetWidth / 2}px`;
+        this.elem.style.left = `${(((Number(this.elem.textContent) - this._min)
+          * this.scale.offsetWidth) / (this._max - this._min))
+          + this.scale.offsetLeft - this.elem.offsetWidth / 2}px`;
       } else if (Number(this.elem.textContent) < 1000) {
         // this.elem.style.left = `${Number(this.elem.textContent) * this.scale.offsetWidth / this._max + 16}px`;
-        this.elem.style.left = `${((Number(this.elem.textContent) - this._min) * this.scale.offsetWidth / (this._max - this._min)) + this.scale.offsetLeft - this.elem.offsetWidth / 2}px`;
+        this.elem.style.left = `${(((Number(this.elem.textContent) - this._min)
+          * this.scale.offsetWidth) / (this._max - this._min))
+          + this.scale.offsetLeft - this.elem.offsetWidth / 2}px`;
       }
       // this.max.insertAdjacentElement('beforebegin', this.elem);
     }

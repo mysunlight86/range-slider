@@ -12,10 +12,10 @@ import Slider from './modules/slider';
 const slider1: Slider = new Slider('#slider1');
 slider1.init();
 
-const slider2: Slider = new Slider('#slider2', {min: 40, step: 60, max: 245});
+const slider2: Slider = new Slider('#slider2', { min: 40, step: 60, max: 245 });
 slider2.init();
 
-const slider3: Slider = new Slider('#slider3', {values: [300]});
+const slider3: Slider = new Slider('#slider3', { values: [300] });
 slider3.init();
 
 // const scale: Scale = new Scale();

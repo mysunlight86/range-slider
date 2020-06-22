@@ -1,4 +1,4 @@
-
+/* global describe */
 // import SliderBody from '../src/modules/sliderBody';
 // import SliderThumb from '../src/modules/sliderThumb';
 
