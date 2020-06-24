@@ -1,10 +1,7 @@
 import './style.scss';
 import Slider from './modules/slider';
 
-// import sliderRun from './modules/sliderRun';
-// import Scale from './modules/scale';
 // import { ConcreteSubject } from './modules/app';
-// import View from './modules/view';
 // import Model from './modules/model';
 // import { ConcreteObserverA, ConcreteObserverB, Presenter } from './modules/presenter';
 // import { Presenter } from './modules/presenter';
@@ -17,14 +14,6 @@ slider2.init();
 
 const slider3: Slider = new Slider('#slider3', { values: [300] });
 slider3.init();
-
-// const scale: Scale = new Scale();
-// scale.init();
-
-// sliderRun();
-
-// const view2: View = new View('slider2');
-// view2.showSlider();
 
 /**
 * Клиентский код.
@@ -44,11 +33,6 @@ slider3.init();
 // subject.detach(observer2);
 
 // subject.someBusinessLogic();
-
-// const el = document.getElementById('content');
-
-// const tom: User = new User('Том', 29);
-// el.innerHTML = `Имя: ${tom.name} возраст: ${tom.age}`;
 
 /* const MVP = {
   makeObservableSubject() {

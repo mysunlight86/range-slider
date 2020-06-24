@@ -16,7 +16,7 @@ export default class Slider {
 
   _min = 0;
   _max = 300;
-  _step = 57;
+  _step = 82;
   _kind = 'horizontal';
   _isBasic = true;
   _values = [this._step];

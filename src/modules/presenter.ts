@@ -113,6 +113,7 @@ class Presenter implements Observer {
     this.thumbElem = view.showSliderThumb();
     this.valueElem = view.showSliderValue();
     this.sliderRun();
+    view.showSliderScale();
     console.log('ModelObserver: Reacted to the event.');
   }
 }

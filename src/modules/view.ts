@@ -15,6 +15,11 @@ export default class View {
   lineElem: HTMLElement;
   thumbElem: HTMLElement;
   valueElem: HTMLElement;
+  scaleElem: HTMLElement;
+  minElem: HTMLElement;
+  maxElem: HTMLElement;
+  middleElem: HTMLElement;
+  mark: number;
 
   constructor(elemId: string, options: optionsType) {
     this._elemId = elemId.slice(1);
@@ -63,6 +68,44 @@ export default class View {
     this.valueElem.textContent = `${this.getSliderValue(this.thumbElem)}`;
     this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
     return this.valueElem;
+  }
+
+  showSliderScale() {
+    this.scaleElem = document.createElement('DIV');
+    this.scaleElem.classList.add('scale');
+    this.minElem = document.createElement('SPAN');
+    this.minElem.textContent = `${this._options.min}`;
+    this.minElem.style.position = 'absolute';
+    this.maxElem = document.createElement('SPAN');
+    this.maxElem.textContent = `${this._options.max}`;
+    this.maxElem.style.position = 'absolute';
+    this.lineElem.append(this.scaleElem);
+    this.scaleElem.append(this.minElem);
+    this.scaleElem.append(this.maxElem);
+    this.minElem.style.left = `${this.scaleElem.offsetLeft - this.minElem.offsetWidth / 2}px`;
+    this.maxElem.style.left = `${this.scaleElem.offsetWidth + this.scaleElem.offsetLeft
+      - this.maxElem.offsetWidth / 2}px`;
+    this.mark = (this._options.max - this._options.min) / this._options.step;
+    for (let i = 1; i < this.mark; i++) {
+      // console.log('loop for');
+      this.middleElem = document.createElement('SPAN');
+      this.middleElem.textContent = `${this._options.step * i + this._options.min}`;
+      // console.log(this.elem.textContent);
+      this.middleElem.style.position = 'absolute';
+      this.maxElem.insertAdjacentElement('beforebegin', this.middleElem);
+      if (Number(this.middleElem.textContent) < 100) {
+        // this.elem.style.left = `${Number(this.elem.textContent) * this.scale.offsetWidth / this._max + 20}px`;
+        this.middleElem.style.left = `${(((Number(this.middleElem.textContent) - this._options.min)
+          * this.scaleElem.offsetWidth) / (this._options.max - this._options.min))
+          + this.scaleElem.offsetLeft - this.middleElem.offsetWidth / 2}px`;
+      } else if (Number(this.middleElem.textContent) < 1000) {
+        // this.elem.style.left = `${Number(this.elem.textContent) * this.scale.offsetWidth / this._max + 16}px`;
+        this.middleElem.style.left = `${(((Number(this.middleElem.textContent) - this._options.min)
+          * this.scaleElem.offsetWidth) / (this._options.max - this._options.min))
+          + this.scaleElem.offsetLeft - this.middleElem.offsetWidth / 2}px`;
+      }
+      // this.max.insertAdjacentElement('beforebegin', this.elem);
+    }
   }
 
   // showScale(min: number, max: number, step: number) {
