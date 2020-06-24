@@ -49,7 +49,6 @@ export default class Slider {
     const presenter = new Presenter();
     model.attach(presenter);
     this.setData();
-    console.log(this._options);
     model.setData(this._options, this._selector);
   }
 }

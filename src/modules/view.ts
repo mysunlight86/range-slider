@@ -25,6 +25,7 @@ export default class View {
     this.lineElem = document.getElementById(this._elemId);
     this.thumbElem = document.createElement('DIV');
     this.valueElem = document.createElement('DIV');
+    return this.lineElem;
   }
 
   showSliderLine() {
@@ -44,19 +45,24 @@ export default class View {
     this.thumbElem.classList.add('slider-thumb');
     this.lineElem.append(this.thumbElem);
     console.log(this._options);
-    // console.log(this._options.values[0]);
     this.thumbElem.style.left = this.getPositionElement(this.thumbElem, this._options.values[0]);
     this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
+    return this.thumbElem;
+  }
+
+  getSliderValue(elem: HTMLElement) {
+    return Math.round(((elem.offsetLeft
+      + elem.offsetWidth / 2 - this.lineElem.offsetLeft)
+      * (this._options.max - this._options.min))
+      / this.lineElem.offsetWidth + this._options.min);
   }
 
   showSliderValue() {
     this.valueElem.classList.add('tip-value');
     this.lineElem.append(this.valueElem);
-    this.valueElem.textContent = `${Math.round(((this.thumbElem.offsetLeft
-       + this.thumbElem.offsetWidth / 2 - this.lineElem.offsetLeft)
-       * (this._options.max - this._options.min))
-       / this.lineElem.offsetWidth + this._options.min)}`;
+    this.valueElem.textContent = `${this.getSliderValue(this.thumbElem)}`;
     this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
+    return this.valueElem;
   }
 
   // showScale(min: number, max: number, step: number) {
