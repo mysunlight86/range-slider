@@ -1,4 +1,5 @@
 import { Presenter } from './presenter';
+import View from './view';
 import Model from './model';
 
 type optionsType = {
@@ -46,9 +47,10 @@ export default class Slider {
 
   init() {
     const model: Model = new Model();
-    const presenter = new Presenter();
-    model.attach(presenter);
     this.setData();
     model.setData(this._options, this._selector);
+    const view = new View(model.getSelector(), model.getData());
+    const presenter = new Presenter(view, model);
+    model.attach(presenter);
   }
 }

@@ -87,25 +87,18 @@ export default class View {
       - this.maxElem.offsetWidth / 2}px`;
     this.mark = (this._options.max - this._options.min) / this._options.step;
     for (let i = 1; i < this.mark; i++) {
-      // console.log('loop for');
       this.middleElem = document.createElement('SPAN');
       this.middleElem.textContent = `${this._options.step * i + this._options.min}`;
-      // console.log(this.elem.textContent);
       this.middleElem.style.position = 'absolute';
       this.maxElem.insertAdjacentElement('beforebegin', this.middleElem);
-      if (Number(this.middleElem.textContent) < 100) {
-        // this.elem.style.left = `${Number(this.elem.textContent) * this.scale.offsetWidth / this._max + 20}px`;
-        this.middleElem.style.left = `${(((Number(this.middleElem.textContent) - this._options.min)
-          * this.scaleElem.offsetWidth) / (this._options.max - this._options.min))
-          + this.scaleElem.offsetLeft - this.middleElem.offsetWidth / 2}px`;
-      } else if (Number(this.middleElem.textContent) < 1000) {
-        // this.elem.style.left = `${Number(this.elem.textContent) * this.scale.offsetWidth / this._max + 16}px`;
-        this.middleElem.style.left = `${(((Number(this.middleElem.textContent) - this._options.min)
-          * this.scaleElem.offsetWidth) / (this._options.max - this._options.min))
-          + this.scaleElem.offsetLeft - this.middleElem.offsetWidth / 2}px`;
-      }
-      // this.max.insertAdjacentElement('beforebegin', this.elem);
+      this.middleElem.style.left = `${(((Number(this.middleElem.textContent) - this._options.min)
+        * this.scaleElem.offsetWidth) / (this._options.max - this._options.min))
+        + this.scaleElem.offsetLeft - this.middleElem.offsetWidth / 2}px`;
     }
+  }
+
+  setOptions(options) {
+    this._options = options;
   }
 
   // showScale(min: number, max: number, step: number) {
