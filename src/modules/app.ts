@@ -1,18 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { Observer } from './presenter';
 
-// class User {
-//   name: string;
-//   age: number;
-
-//   constructor(_name: string, _age: number) {
-//     this.name = _name;
-//     this.age = _age;
-//   }
-// }
-
-// export default User;
-
 /**
  * Интферфейс издателя объявляет набор методов для управлениями подписчиками.
  */

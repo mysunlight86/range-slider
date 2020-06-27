@@ -4,12 +4,10 @@ $leftSliderThumb: 100px - $widthSliderThumb / 2;
 $leftTipValue: $leftSliderThumb - ($widthTipValue - $widthSliderThumb) / 2;
 
 div {
-  // box-sizing:content-box;
   box-sizing:border-box;
 }
 
 .wrapper {
-  // width: 400px;
   width: 70%;
 }
 
@@ -17,14 +15,9 @@ div {
   width: 100%;
   height: 6px;
   background-color: #e5e5e5;
-  // background: linear-gradient(to right, red 100px, #e5e5e5 100px);
   border-radius: 5px;
   margin: 70px;
 }
-
-// .fill-slider-line {
-//   background: linear-gradient(to right, red 100px, #e5e5e5 100px);
-// }
 
 .slider-thumb {
   width: $widthSliderThumb;

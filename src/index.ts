@@ -2,9 +2,7 @@ import './style.scss';
 import Slider from './modules/slider';
 
 // import { ConcreteSubject } from './modules/app';
-// import Model from './modules/model';
 // import { ConcreteObserverA, ConcreteObserverB, Presenter } from './modules/presenter';
-// import { Presenter } from './modules/presenter';
 
 const slider1: Slider = new Slider('#slider1');
 slider1.init();

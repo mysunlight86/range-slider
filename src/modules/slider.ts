@@ -1,13 +1,13 @@
 import { Presenter } from './presenter';
 import View from './view';
-import Model from './model';
+import { Model } from './model';
 
 type optionsType = {
   min?: number,
   max?: number,
   step?: number,
-  kind?: string,
-  isBasic?: boolean,
+  mode?: string,
+  hasInterval?: boolean,
   values?: number[]
 };
 
@@ -18,8 +18,8 @@ export default class Slider {
   _min = 0;
   _max = 300;
   _step = 82;
-  _kind = 'horizontal';
-  _isBasic = true;
+  _mode = 'horizontal';
+  _hasInterval = true;
   _values = [this._step];
 
   constructor(elemId: string, options?: optionsType) {
@@ -28,8 +28,8 @@ export default class Slider {
       this._min = options.min ? options.min : this._min;
       this._max = options.max ? options.max : this._max;
       this._step = options.step ? options.step : this._step;
-      this._kind = options.kind ? options.kind : this._kind;
-      this._isBasic = options.isBasic ? options.isBasic : this._isBasic;
+      this._mode = options.mode ? options.mode : this._mode;
+      this._hasInterval = options.hasInterval ? options.hasInterval : this._hasInterval;
       this._values = options.values ? options.values : [this._step];
     }
   }
@@ -39,8 +39,8 @@ export default class Slider {
       min: this._min,
       max: this._max,
       step: this._step,
-      kind: this._kind,
-      isBasic: this._isBasic,
+      mode: this._mode,
+      hasInterval: this._hasInterval,
       values: this._values,
     };
   }
@@ -48,8 +48,8 @@ export default class Slider {
   init() {
     const model: Model = new Model();
     this.setData();
-    model.setData(this._options, this._selector);
-    const view = new View(model.getSelector(), model.getData());
+    model.setData(this._options);
+    const view = new View(this._selector, this._options);
     const presenter = new Presenter(view, model);
     model.attach(presenter);
   }

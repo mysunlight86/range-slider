@@ -1,7 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import Subject from './app';
-// eslint-disable-next-line no-unused-vars
-import Model from './model';
+import { Subject, Model } from './model';
 // eslint-disable-next-line no-unused-vars
 import View from './view';
 
@@ -9,8 +7,8 @@ type optionsType = {
   min?: number,
   max?: number,
   step?: number,
-  kind?: string,
-  isBasic?: boolean,
+  mode?: string,
+  hasInterval?: boolean,
   values?: number[]
 };
 
@@ -20,7 +18,7 @@ type optionsType = {
 */
 interface Observer {
   // Получить обновление от субъекта.
-  communicate(subject: Subject): void;
+  update(subject: Subject): void;
 }
 
 /**
@@ -43,45 +41,49 @@ class Presenter implements Observer {
   private bindedOnResize;
   _selector: string;
   _options: optionsType;
+  _min: number;
+  _max: number;
+  _step: number;
+  _mode: string;
+  _hasInterval: boolean;
+  _values: number[];
   lineElem: HTMLElement;
   thumbElem: HTMLElement;
   valueElem: HTMLElement;
 
-  private view: View;
+  private _view: View;
   private _model: Model;
 
   constructor(view: View, model: Model) {
     this.bindedOnMouseMove = this.onMouseMove.bind(this);
     this.bindedOnMouseUp = this.onMouseUp.bind(this);
     this.bindedOnMouseDown = this.onMouseDown.bind(this);
-    // this.bindedOnResize = Presenter.onResize.bind(this);
     this.bindedOnResize = this.onResize.bind(this);
-    this.view = view;
-    this.lineElem = this.view.init();
-    this.view.showSliderLine();
-    this.thumbElem = view.showSliderThumb();
 
-    this._options = model.getData();
-    this.valueElem = view.showSliderValue();
+    this._view = view;
+    this.lineElem = this._view.initSliderLine();
+    this.thumbElem = this._view.initSliderThumb();
+
     this._model = model;
+    this._options = this._model.getData();
+    this._min = this._options.min;
+    this._max = this._options.max;
+    this._step = this._options.step;
+    this._mode = this._options.mode;
+    this._hasInterval = this._options.hasInterval;
+    this._values = this._options.values;
+
+    this.valueElem = this._view.initSliderValue();
+    this._view.initSliderScale();
 
     this.sliderRun();
+    this.setData();
+    this._model.setData(this._options);
   }
-
-  // private bindedOnMouseUp = this.onMouseUp.bind(this);
 
   onMouseMove(event: MouseEvent): void {
     const delta = this.thumbElem.offsetWidth / 2;
     let thumbPoint = event.clientX - this.lineElem.getBoundingClientRect().left - delta;
-    // const min = this._options.min;
-    const {
-      min,
-      max,
-      // step,
-      // kind,
-      // isBasic,
-      // values
-    } = this._options;
 
     // курсор вышел из слайдера => оставить бегунок в его границах.
     if (thumbPoint < -delta) {
@@ -97,15 +99,14 @@ class Presenter implements Observer {
     this.valueElem.style.left = `${thumbPoint - (this.valueElem.offsetWidth - this.thumbElem.offsetWidth) / 2}px`;
 
     const val = Math.round(((thumbPoint
-      + delta) * (max - min)) / this.lineElem.offsetWidth + min);
+      + delta) * (this._max - this._min)) / this.lineElem.offsetWidth + this._min);
 
-    const data = this._model.getData();
-    data.values[0] = val;
-    const selector = this._model.getSelector();
-    this._model.setData(data, selector);
+    // const data = this._model.getData();
+    this._values[0] = val;
+    // this._model.setData(data);
 
     this.valueElem.textContent = `${Math.round(((thumbPoint
-      + delta) * (max - min)) / this.lineElem.offsetWidth + min)}`;
+      + delta) * (this._max - this._min)) / this.lineElem.offsetWidth + this._min)}`;
   }
 
   onMouseUp(): void {
@@ -138,37 +139,35 @@ class Presenter implements Observer {
     window.removeEventListener('resize', this.bindedOnResize);
   }
 
-  // static onResize(view: View) {
-  //   view.showSliderLine();
-  //   this.thumbElem = view.showSliderThumb();
-  //   this.valueElem = view.showSliderValue();
-  // }
-
-  onResize() {
-    this.view.setOptions(this._options);
-
-    this.view.showSliderThumb();
-    this.view.showSliderValue();
-
-    // this function create new elemnts
-    // TODO: use exist elements
-    // this.view.showSliderScale();
-
-    console.log(this.lineElem.offsetWidth);
+  setData() {
+    this._options = {
+      min: this._min,
+      max: this._max,
+      step: this._step,
+      mode: this._mode,
+      hasInterval: this._hasInterval,
+      values: this._values,
+    };
   }
 
-  communicate(model: Model) {
-    this._selector = model.getSelector();
+  onResize() {
+    this._view.setOptions(this._options);
+    this._view.updateSliderThumb();
+    this._view.updateSliderValue();
+    this._view.updateSliderScale();
+  }
+
+  update(model: Model) {
     this._options = model.getData();
-    this.view.setOptions(this._options);
-    this.thumbElem = this.view.showSliderThumb();
-    this.valueElem = this.view.showSliderValue();
+    // this._view.setOptions(this._options);
+    // this.thumbElem = this._view.showSliderThumb();
+    // this.valueElem = this._view.showSliderValue();
 
     // this function create new elemnts
     // TODO: use exist elements
     // this.view.showSliderScale();
 
-    console.log('ModelObserver: Reacted to the event.');
+    // console.log('ModelObserver: Reacted to the event.');
   }
 }
 

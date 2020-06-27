@@ -1,25 +1,37 @@
 // eslint-disable-next-line no-unused-vars
-import Subject from './app';
-// eslint-disable-next-line no-unused-vars
 import { Observer } from './presenter';
 
-type options = {
+type optionsType = {
   min?: number;
   max?: number;
   step?: number;
-  kind?: string;
-  isBasic?: boolean;
+  mode?: string;
+  hasInterval?: boolean;
   values?: number[];
 };
 
-export default class Model implements Subject {
-  private _min: number;
-  private _max: number;
-  private _step: number;
-  private _kind: string;
-  private _isBasic: boolean;
-  private _values: number[];
-  _selector: string;
+/**
+ * Интферфейс издателя объявляет набор методов для управлениями подписчиками.
+ */
+interface Subject {
+  // Присоединяет наблюдателя к издателю.
+  attach(observer: Observer): void;
+
+  // Отсоединяет наблюдателя от издателя.
+  detach(observer: Observer): void;
+
+  // Уведомляет всех наблюдателей о событии.
+  notify(): void;
+// eslint-disable-next-line semi
+}
+
+class Model implements Subject {
+  _min: number;
+  _max: number;
+  _step: number;
+  _mode: string;
+  _hasInterval: boolean;
+  _values: number[];
 
   // constructor(options?: options) {
   //   if (!options) options = {}
@@ -44,48 +56,43 @@ export default class Model implements Subject {
   public attach(observer: Observer): void {
     const isExist = this.observers.includes(observer);
     if (isExist) {
-      console.log('Model: Presenter has been attached already.');
+      // console.log('Model: Presenter has been attached already.');
     }
 
-    console.log('Model: Attached a presenter.');
+    // console.log('Model: Attached a presenter.');
     this.observers.push(observer);
   }
 
   public detach(observer: Observer): void {
     const observerIndex = this.observers.indexOf(observer);
     if (observerIndex === -1) {
-      console.log('Subject: Nonexistent observer.');
+      // console.log('Subject: Nonexistent observer.');
     }
 
     this.observers.splice(observerIndex, 1);
-    console.log('Subject: Detached an observer.');
+    // console.log('Subject: Detached an observer.');
   }
 
   /**
    * Запуск обновления в каждом подписчике.
    */
   public notify(): void {
-    console.log('Model: Notifying observers...');
+    // console.log('Model: Notifying observers...');
     // eslint-disable-next-line no-restricted-syntax
     for (const observer of this.observers) {
-      observer.communicate(this);
+      observer.update(this);
     }
   }
 
-  setData(options: options, selector: string) {
+  setData(options: optionsType) {
     this._min = options.min;
     this._max = options.max;
     this._step = options.step;
-    this._kind = options.kind;
-    this._isBasic = options.isBasic;
+    this._mode = options.mode;
+    this._hasInterval = options.hasInterval;
     this._values = options.values;
-    this._selector = selector;
-    console.log('Model: My state has just changed');
+    // console.log('Model: My state has just changed');
     this.notify();
-  }
-
-  getSelector() {
-    return this._selector;
   }
 
   getData() {
@@ -93,9 +100,12 @@ export default class Model implements Subject {
       min: this._min,
       max: this._max,
       step: this._step,
-      kind: this._kind,
-      isBasic: this._isBasic,
+      mode: this._mode,
+      hasInterval: this._hasInterval,
       values: this._values,
     };
   }
 }
+
+// eslint-disable-next-line no-undef
+export { Subject, Model };
