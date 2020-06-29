@@ -34,7 +34,6 @@ interface Observer {
 // }
 
 class Presenter implements Observer {
-  // modelOptions: {min: number, max: number, step: number};
   private bindedOnMouseMove;
   private bindedOnMouseUp;
   private bindedOnMouseDown;

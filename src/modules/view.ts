@@ -1,3 +1,8 @@
+import SliderLine from './sliderLine';
+import SliderThumb from './sliderThumb';
+import SliderValue from './sliderValue';
+import SliderScale from './sliderScale';
+
 type optionsType = {
   min?: number,
   max?: number,
@@ -21,10 +26,6 @@ export default class View {
   thumbElem: HTMLElement;
   valueElem: HTMLElement;
   scaleElem: HTMLElement;
-  minElem: HTMLElement;
-  maxElem: HTMLElement;
-  middleElem: HTMLElement;
-  mark: number;
 
   constructor(elemId: string, options: optionsType) {
     this._elemId = elemId.slice(1);
@@ -37,59 +38,26 @@ export default class View {
   }
 
   initSliderLine() {
-    this.lineElem = document.getElementById(this._elemId);
-    this.lineElem.classList.add('slider-body');
+    this.lineElem = new SliderLine(this._elemId).init();
     return this.lineElem;
   }
 
   initSliderThumb() {
-    this.thumbElem = document.createElement('DIV');
-    this.thumbElem.classList.add('slider-thumb');
-    this.lineElem.append(this.thumbElem);
+    this.thumbElem = new SliderThumb(this.lineElem).init();
     this.thumbElem.style.left = this.getPositionElement(this.thumbElem, this._values[0]);
     this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
     return this.thumbElem;
   }
 
   initSliderValue() {
-    this.valueElem = document.createElement('DIV');
-    this.valueElem.classList.add('tip-value');
-    this.lineElem.append(this.valueElem);
+    this.valueElem = new SliderValue(this.lineElem).init();
     this.valueElem.textContent = `${this.getSliderValue(this.thumbElem)}`;
     this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
     return this.valueElem;
   }
 
   initSliderScale() {
-    this.scaleElem = document.createElement('DIV');
-    this.scaleElem.classList.add('scale');
-
-    this.minElem = document.createElement('SPAN');
-    this.minElem.textContent = `${this._min}`;
-    this.minElem.style.position = 'absolute';
-
-    this.maxElem = document.createElement('SPAN');
-    this.maxElem.textContent = `${this._max}`;
-    this.maxElem.style.position = 'absolute';
-
-    this.lineElem.append(this.scaleElem);
-    this.scaleElem.append(this.minElem);
-    this.scaleElem.append(this.maxElem);
-
-    this.minElem.style.left = `${this.scaleElem.offsetLeft - this.minElem.offsetWidth / 2}px`;
-    this.maxElem.style.left = `${this.scaleElem.offsetWidth + this.scaleElem.offsetLeft
-      - this.maxElem.offsetWidth / 2}px`;
-
-    this.mark = (this._max - this._min) / this._step;
-    for (let i = 1; i < this.mark; i++) {
-      this.middleElem = document.createElement('SPAN');
-      this.middleElem.textContent = `${this._step * i + this._min}`;
-      this.middleElem.style.position = 'absolute';
-      this.maxElem.insertAdjacentElement('beforebegin', this.middleElem);
-      this.middleElem.style.left = `${(((Number(this.middleElem.textContent) - this._min)
-        * this.scaleElem.offsetWidth) / (this._max - this._min))
-        + this.scaleElem.offsetLeft - this.middleElem.offsetWidth / 2}px`;
-    }
+    this.scaleElem = new SliderScale(this.lineElem, this._min, this._max, this._step).init();
   }
 
   getPositionElement(elem: HTMLElement, val: number) {
@@ -116,10 +84,8 @@ export default class View {
   }
 
   updateSliderScale() {
-    this.maxElem.style.left = `${this.scaleElem.offsetWidth + this.scaleElem.offsetLeft
-      - this.maxElem.offsetWidth / 2}px`;
     const middleElems: any = Array.from(this.scaleElem.children);
-    for (let i = 1; i < this.mark; i++) {
+    for (let i = 1; i < middleElems.length; i++) {
       middleElems[i].style.left = `${(((Number(middleElems[i].textContent) - this._min)
         * this.scaleElem.offsetWidth) / (this._max - this._min))
         + this.scaleElem.offsetLeft - middleElems[i].offsetWidth / 2}px`;
