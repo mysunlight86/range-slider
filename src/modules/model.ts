@@ -92,10 +92,44 @@ class Model implements Subject {
     this._hasInterval = options.hasInterval;
     this._values = options.values;
     // console.log('Model: My state has just changed');
+    // this.notify();
+    this.checkValues();
+  }
+
+  checkValues() {
+    if (this._min > this._max) {
+      const temp = this._min;
+      this._min = this._max;
+      this._max = temp;
+    }
+
+    if (this._step > (this._max - this._min)) {
+      this._step = this._max;
+    }
+
+    if (this._hasInterval) {
+      if (this._values[0] > this._values[1]) {
+        const temp = this._values[0];
+        // eslint-disable-next-line prefer-destructuring
+        this._values[0] = this._values[1];
+        this._values[1] = temp;
+      } else if (this._values[0] === this._values[1]) {
+        this._values[1] += this._step;
+      }
+    }
+
+    if ((this._values[0] < this._min) || (this._values[0] > this._max)) {
+      this._values[0] = this._min;
+    }
+
+    if ((this._values[1] < this._min) || (this._values[1] > this._max)) {
+      this._values[1] = this._max;
+    }
     this.notify();
   }
 
   getData() {
+    // this.checkValues();
     return {
       min: this._min,
       max: this._max,

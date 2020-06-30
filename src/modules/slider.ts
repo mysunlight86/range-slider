@@ -19,7 +19,7 @@ export default class Slider {
   _max = 300;
   _step = 82;
   _mode = 'horizontal';
-  _hasInterval = true;
+  _hasInterval = false;
   _values = [this._step];
 
   constructor(elemId: string, options?: optionsType) {
@@ -46,9 +46,10 @@ export default class Slider {
   }
 
   init() {
-    const model: Model = new Model();
     this.setData();
+    const model: Model = new Model();
     model.setData(this._options);
+    this._options = model.getData();
     const view = new View(this._selector, this._options);
     const presenter = new Presenter(view, model);
     model.attach(presenter);

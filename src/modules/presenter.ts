@@ -62,6 +62,8 @@ class Presenter implements Observer {
     this._view = view;
     this.lineElem = this._view.initSliderLine();
     this.thumbElem = this._view.initSliderThumb();
+    this.valueElem = this._view.initSliderValue();
+    this._view.initSliderScale();
 
     this._model = model;
     this._options = this._model.getData();
@@ -72,12 +74,9 @@ class Presenter implements Observer {
     this._hasInterval = this._options.hasInterval;
     this._values = this._options.values;
 
-    this.valueElem = this._view.initSliderValue();
-    this._view.initSliderScale();
-
     this.sliderRun();
     this.setData();
-    this._model.setData(this._options);
+    // this._model.setData(this._options);
   }
 
   onMouseMove(event: MouseEvent): void {
@@ -158,15 +157,8 @@ class Presenter implements Observer {
 
   update(model: Model) {
     this._options = model.getData();
-    // this._view.setOptions(this._options);
-    // this.thumbElem = this._view.showSliderThumb();
-    // this.valueElem = this._view.showSliderValue();
-
-    // this function create new elemnts
-    // TODO: use exist elements
-    // this.view.showSliderScale();
-
-    // console.log('ModelObserver: Reacted to the event.');
+    this.onResize();
+    console.log('ModelObserver: Reacted to the event.');
   }
 }
 
