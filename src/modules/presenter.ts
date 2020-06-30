@@ -49,6 +49,10 @@ class Presenter implements Observer {
   lineElem: HTMLElement;
   thumbElem: HTMLElement;
   valueElem: HTMLElement;
+  minThumbInterval: HTMLElement;
+  maxThumbInterval: HTMLElement;
+  minValueInterval: HTMLElement;
+  maxValueInterval: HTMLElement;
 
   private _view: View;
   private _model: Model;
@@ -59,12 +63,6 @@ class Presenter implements Observer {
     this.bindedOnMouseDown = this.onMouseDown.bind(this);
     this.bindedOnResize = this.onResize.bind(this);
 
-    this._view = view;
-    this.lineElem = this._view.initSliderLine();
-    this.thumbElem = this._view.initSliderThumb();
-    this.valueElem = this._view.initSliderValue();
-    this._view.initSliderScale();
-
     this._model = model;
     this._options = this._model.getData();
     this._min = this._options.min;
@@ -74,7 +72,21 @@ class Presenter implements Observer {
     this._hasInterval = this._options.hasInterval;
     this._values = this._options.values;
 
-    this.sliderRun();
+    this._view = view;
+    this.lineElem = this._view.initSliderLine();
+    if (this._hasInterval) {
+      this.minThumbInterval = this._view.initSliderThumb(this._values[0]);
+      this.maxThumbInterval = this._view.initSliderThumb(this._values[1]);
+
+      this.minValueInterval = this._view.initSliderValue(this._values[0]);
+      this.maxValueInterval = this._view.initSliderValue(this._values[1]);
+    } else {
+      this.thumbElem = this._view.initSliderThumb(this._values[0]);
+      this.valueElem = this._view.initSliderValue(this._values[0]);
+    }
+    this._view.initSliderScale();
+
+    // this.sliderRun();
     this.setData();
     // this._model.setData(this._options);
   }

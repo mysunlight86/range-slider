@@ -42,17 +42,19 @@ export default class View {
     return this.lineElem;
   }
 
-  initSliderThumb() {
+  initSliderThumb(value: number) {
     this.thumbElem = new SliderThumb(this.lineElem).init();
-    this.thumbElem.style.left = this.getPositionElement(this.thumbElem, this._values[0]);
+    this.thumbElem.style.left = this.getPositionElement(this.thumbElem, value);
     this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
     return this.thumbElem;
   }
 
-  initSliderValue() {
+  initSliderValue(value: number) {
     this.valueElem = new SliderValue(this.lineElem).init();
-    this.valueElem.textContent = `${this.getSliderValue(this.thumbElem)}`;
-    this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
+    // this.valueElem.textContent = `${this.getSliderValue(this.thumbElem)}`;
+    this.valueElem.textContent = `${value}`;
+    // this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
+    this.valueElem.style.left = this.getPositionElement(this.valueElem, value);
     return this.valueElem;
   }
 

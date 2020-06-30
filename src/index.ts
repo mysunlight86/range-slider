@@ -13,8 +13,11 @@ slider2.init();
 const slider3: Slider = new Slider('#slider3', { values: [300] });
 slider3.init();
 
-const slider4: Slider = new Slider('#slider4', { hasInterval: true, values: [29, 138] });
+const slider4: Slider = new Slider('#slider4', { hasInterval: true, values: [82, 164] });
 slider4.init();
+
+const slider5: Slider = new Slider('#slider5', { hasInterval: true, values: [29, 138] });
+slider5.init();
 
 /**
 * Клиентский код.
