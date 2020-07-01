@@ -80,15 +80,44 @@ class Presenter implements Observer {
 
       this.minValueInterval = this._view.initSliderValue(this._values[0]);
       this.maxValueInterval = this._view.initSliderValue(this._values[1]);
+
+      this._view.fillSliderLine(Number(this.maxThumbInterval.style.left.slice(0, -2)),
+        Number(this.minThumbInterval.style.left.slice(0, -2)));
     } else {
       this.thumbElem = this._view.initSliderThumb(this._values[0]);
       this.valueElem = this._view.initSliderValue(this._values[0]);
+      this._view.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
     }
     this._view.initSliderScale();
 
-    // this.sliderRun();
-    this.setData();
+    this.sliderRun();
+    // this.setData();
     // this._model.setData(this._options);
+  }
+
+  setData() {
+    this._options = {
+      min: this._min,
+      max: this._max,
+      step: this._step,
+      mode: this._mode,
+      hasInterval: this._hasInterval,
+      values: this._values,
+    };
+  }
+
+  onResize() {
+    // this.setData();
+    this._view.setOptions(this._options);
+    this._view.updateSliderThumb();
+    this._view.updateSliderValue();
+    this._view.updateSliderScale();
+  }
+
+  update(model: Model) {
+    this._options = model.getData();
+    this.onResize();
+    console.log('ModelObserver: Reacted to the event.');
   }
 
   onMouseMove(event: MouseEvent): void {
@@ -114,6 +143,7 @@ class Presenter implements Observer {
     // const data = this._model.getData();
     this._values[0] = val;
     // this._model.setData(data);
+    // this._model.setData(this._options);
 
     this.valueElem.textContent = `${Math.round(((thumbPoint
       + delta) * (this._max - this._min)) / this.lineElem.offsetWidth + this._min)}`;
@@ -136,10 +166,12 @@ class Presenter implements Observer {
   }
 
   sliderRun() {
-    this.thumbElem.addEventListener('mousedown', this.bindedOnMouseDown);
-    this.lineElem.addEventListener('click', this.bindedOnMouseMove);
-    this.thumbElem.addEventListener('dragstart', Presenter.returnFalse);
-    window.addEventListener('resize', this.bindedOnResize);
+    if (this._hasInterval) {} else {
+      this.thumbElem.addEventListener('mousedown', this.bindedOnMouseDown);
+      this.lineElem.addEventListener('click', this.bindedOnMouseMove);
+      this.thumbElem.addEventListener('dragstart', Presenter.returnFalse);
+      window.addEventListener('resize', this.bindedOnResize);
+    }
   }
 
   destroy() {
@@ -147,30 +179,6 @@ class Presenter implements Observer {
     this.lineElem.removeEventListener('click', this.bindedOnMouseMove);
     this.thumbElem.removeEventListener('dragstart', Presenter.returnFalse);
     window.removeEventListener('resize', this.bindedOnResize);
-  }
-
-  setData() {
-    this._options = {
-      min: this._min,
-      max: this._max,
-      step: this._step,
-      mode: this._mode,
-      hasInterval: this._hasInterval,
-      values: this._values,
-    };
-  }
-
-  onResize() {
-    this._view.setOptions(this._options);
-    this._view.updateSliderThumb();
-    this._view.updateSliderValue();
-    this._view.updateSliderScale();
-  }
-
-  update(model: Model) {
-    this._options = model.getData();
-    this.onResize();
-    console.log('ModelObserver: Reacted to the event.');
   }
 }
 

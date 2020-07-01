@@ -45,11 +45,11 @@ export default class View {
   initSliderThumb(value: number) {
     this.thumbElem = new SliderThumb(this.lineElem).init();
     this.thumbElem.style.left = this.getPositionElement(this.thumbElem, value);
-    this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
+    // this.thumbElem.style.left = '0';
     return this.thumbElem;
   }
 
-  initSliderValue(value: number) {
+  initSliderValue(value?: number) {
     this.valueElem = new SliderValue(this.lineElem).init();
     // this.valueElem.textContent = `${this.getSliderValue(this.thumbElem)}`;
     this.valueElem.textContent = `${value}`;
@@ -66,12 +66,19 @@ export default class View {
     return `${((val - this._min) * this.lineElem.offsetWidth) / (this._max - this._min) - elem.offsetWidth / 2}px`;
   }
 
-  fillSliderLine(length: number) {
-    this.lineElem.style.background = `linear-gradient(to right, red ${length}px, #e5e5e5 ${length}px)`;
+  fillSliderLine(pointTo: number, pointFrom?: number) {
+    if (pointFrom) {
+      this.lineElem.style.background = `linear-gradient(to right, #e5e5e5 ${pointFrom}px,
+        red ${pointFrom}px, red ${pointTo}px, #e5e5e5 ${pointTo}px)`;
+    } else {
+      this.lineElem.style.background = `linear-gradient(to right, red ${pointTo}px, #e5e5e5 ${pointTo}px)`;
+    }
   }
 
   getSliderValue(elem: HTMLElement) {
-    return Math.round(((elem.offsetLeft + elem.offsetWidth / 2 - this.lineElem.offsetLeft)
+    // return Math.round(((elem.offsetLeft + elem.offsetWidth / 2 - this.lineElem.offsetLeft)
+    //   * (this._max - this._min)) / this.lineElem.offsetWidth + this._min);
+    return Math.round(((elem.offsetLeft + elem.offsetWidth / 2)
       * (this._max - this._min)) / this.lineElem.offsetWidth + this._min);
   }
 
