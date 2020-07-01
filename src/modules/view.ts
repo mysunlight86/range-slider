@@ -82,12 +82,15 @@ export default class View {
       * (this._max - this._min)) / this.lineElem.offsetWidth + this._min);
   }
 
-  updateSliderThumb() {
-    this.thumbElem.style.left = this.getPositionElement(this.thumbElem, this._values[0]);
-    this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
+  updateSliderThumb(elem: HTMLElement, value: number) {
+    this.thumbElem = elem;
+    this.thumbElem.style.left = this.getPositionElement(this.thumbElem, value);
+    // this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
   }
 
-  updateSliderValue() {
+  updateSliderValue(label: HTMLElement, thumb: HTMLElement) {
+    this.valueElem = label;
+    this.thumbElem = thumb;
     this.valueElem.textContent = `${this.getSliderValue(this.thumbElem)}`;
     this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
   }

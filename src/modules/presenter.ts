@@ -95,31 +95,6 @@ class Presenter implements Observer {
     // this._model.setData(this._options);
   }
 
-  setData() {
-    this._options = {
-      min: this._min,
-      max: this._max,
-      step: this._step,
-      mode: this._mode,
-      hasInterval: this._hasInterval,
-      values: this._values,
-    };
-  }
-
-  onResize() {
-    // this.setData();
-    this._view.setOptions(this._options);
-    this._view.updateSliderThumb();
-    this._view.updateSliderValue();
-    this._view.updateSliderScale();
-  }
-
-  update(model: Model) {
-    this._options = model.getData();
-    this.onResize();
-    console.log('ModelObserver: Reacted to the event.');
-  }
-
   onMouseMove(event: MouseEvent): void {
     const delta = this.thumbElem.offsetWidth / 2;
     let thumbPoint = event.clientX - this.lineElem.getBoundingClientRect().left - delta;
@@ -166,11 +141,16 @@ class Presenter implements Observer {
   }
 
   sliderRun() {
-    if (this._hasInterval) {} else {
+    this.lineElem.addEventListener('click', this.bindedOnMouseMove);
+    window.addEventListener('resize', this.bindedOnResize);
+    if (this._hasInterval) {
+      this.minThumbInterval.addEventListener('mousedown', this.bindedOnMouseDown);
+      this.minThumbInterval.addEventListener('dragstart', Presenter.returnFalse);
+      this.maxThumbInterval.addEventListener('mousedown', this.bindedOnMouseDown);
+      this.maxThumbInterval.addEventListener('dragstart', Presenter.returnFalse);
+    } else {
       this.thumbElem.addEventListener('mousedown', this.bindedOnMouseDown);
-      this.lineElem.addEventListener('click', this.bindedOnMouseMove);
       this.thumbElem.addEventListener('dragstart', Presenter.returnFalse);
-      window.addEventListener('resize', this.bindedOnResize);
     }
   }
 
@@ -179,6 +159,41 @@ class Presenter implements Observer {
     this.lineElem.removeEventListener('click', this.bindedOnMouseMove);
     this.thumbElem.removeEventListener('dragstart', Presenter.returnFalse);
     window.removeEventListener('resize', this.bindedOnResize);
+  }
+
+  setData() {
+    this._options = {
+      min: this._min,
+      max: this._max,
+      step: this._step,
+      mode: this._mode,
+      hasInterval: this._hasInterval,
+      values: this._values,
+    };
+  }
+
+  onResize() {
+    // this.setData();
+    this._view.setOptions(this._options);
+    this._view.updateSliderScale();
+    if (this._hasInterval) {
+      this._view.updateSliderThumb(this.minThumbInterval, this._values[0]);
+      this._view.updateSliderThumb(this.maxThumbInterval, this._values[1]);
+      this._view.fillSliderLine(Number(this.maxThumbInterval.style.left.slice(0, -2)),
+        Number(this.minThumbInterval.style.left.slice(0, -2)));
+      this._view.updateSliderValue(this.minValueInterval, this.minThumbInterval);
+      this._view.updateSliderValue(this.maxValueInterval, this.maxThumbInterval);
+    } else {
+      this._view.updateSliderThumb(this.thumbElem, this._values[0]);
+      this._view.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
+      this._view.updateSliderValue(this.valueElem, this.thumbElem);
+    }
+  }
+
+  update(model: Model) {
+    this._options = model.getData();
+    this.onResize();
+    console.log('ModelObserver: Reacted to the event.');
   }
 }
 
