@@ -10,10 +10,10 @@ slider1.init();
 const slider2: Slider = new Slider('#slider2', { min: 40, step: 60, max: 245 });
 slider2.init();
 
-const slider3: Slider = new Slider('#slider3', { values: [300] });
+const slider3: Slider = new Slider('#slider3', { min: -100, values: [300] });
 slider3.init();
 
-const slider4: Slider = new Slider('#slider4', { hasInterval: true, values: [82, 164] });
+const slider4: Slider = new Slider('#slider4', { min: -27, hasInterval: true, values: [55, 137] });
 slider4.init();
 
 const slider5: Slider = new Slider('#slider5', { hasInterval: true, values: [29, 138] });

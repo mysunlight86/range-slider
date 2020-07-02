@@ -96,32 +96,87 @@ class Presenter implements Observer {
   }
 
   onMouseMove(event: MouseEvent): void {
-    const delta = this.thumbElem.offsetWidth / 2;
-    let thumbPoint = event.clientX - this.lineElem.getBoundingClientRect().left - delta;
+    if (this._hasInterval) {
+      const delta = this.minThumbInterval.offsetWidth / 2;
+      let thumbPoint = event.clientX - this.lineElem.getBoundingClientRect().left - delta;
 
-    // курсор вышел из слайдера => оставить бегунок в его границах.
-    if (thumbPoint < -delta) {
-      thumbPoint = -delta;
+      // The cursor is out of the slider, then you need to put the slider within its borders.
+      if (thumbPoint < -delta) {
+        thumbPoint = -delta;
+      }
+
+      const rightEdge = this.lineElem.offsetWidth - delta;
+      if (thumbPoint > rightEdge) {
+        thumbPoint = rightEdge;
+      }
+
+      if (thumbPoint <= this.minThumbInterval.offsetLeft) {
+        this.minThumbInterval.style.left = `${thumbPoint}px`;
+        this._values[0] = this._view.getSliderValue(this.minThumbInterval);
+        this.minValueInterval.textContent = `${this._values[0]}`;
+        this.minValueInterval.style.left = `${thumbPoint - (this.minValueInterval.offsetWidth
+          - this.minThumbInterval.offsetWidth) / 2}px`;
+      } else if (thumbPoint >= this.maxThumbInterval.offsetLeft) {
+        this.maxThumbInterval.style.left = `${thumbPoint}px`;
+        this._values[1] = this._view.getSliderValue(this.maxThumbInterval);
+        this.maxValueInterval.textContent = `${this._values[1]}`;
+        this.maxValueInterval.style.left = `${thumbPoint - (this.maxValueInterval.offsetWidth
+          - this.maxThumbInterval.offsetWidth) / 2}px`;
+      } else {
+        let distance = this.maxThumbInterval.offsetLeft - this.minThumbInterval.offsetLeft;
+
+        if (thumbPoint - this.minThumbInterval.offsetLeft <= distance / 2) {
+          if (distance > 0) {
+            this.minThumbInterval.style.left = `${thumbPoint}px`;
+            this._values[0] = this._view.getSliderValue(this.minThumbInterval);
+            this.minValueInterval.textContent = `${this._values[0]}`;
+            this.minValueInterval.style.left = `${thumbPoint - (this.minValueInterval.offsetWidth
+              - this.minThumbInterval.offsetWidth) / 2}px`;
+            distance = this.maxThumbInterval.offsetLeft - this.minThumbInterval.offsetLeft;
+          }
+        } else if (distance > 0) {
+          this.maxThumbInterval.style.left = `${thumbPoint}px`;
+          this._values[1] = this._view.getSliderValue(this.maxThumbInterval);
+          this.maxValueInterval.textContent = `${this._values[1]}`;
+          this.maxValueInterval.style.left = `${thumbPoint - (this.maxValueInterval.offsetWidth
+            - this.maxThumbInterval.offsetWidth) / 2}px`;
+          distance = this.maxThumbInterval.offsetLeft - this.minThumbInterval.offsetLeft;
+        }
+      }
+
+      this._view.fillSliderLine(Number(this.maxThumbInterval.style.left.slice(0, -2)),
+        Number(this.minThumbInterval.style.left.slice(0, -2)));
+    } else {
+      const delta = this.thumbElem.offsetWidth / 2;
+      let thumbPoint = event.clientX - this.lineElem.getBoundingClientRect().left - delta;
+
+      // The cursor is out of the slider, then you need to put the slider within its borders.
+      if (thumbPoint < -delta) {
+        thumbPoint = -delta;
+      }
+      const rightEdge = this.lineElem.offsetWidth - delta;
+      if (thumbPoint > rightEdge) {
+        thumbPoint = rightEdge;
+      }
+
+      this.thumbElem.style.left = `${thumbPoint}px`;
+      this.lineElem.style.background = `linear-gradient(to right, red ${thumbPoint}px, #e5e5e5 ${thumbPoint}px)`;
+      this.valueElem.style.left = `${thumbPoint - (this.valueElem.offsetWidth - this.thumbElem.offsetWidth) / 2}px`;
+
+      // const val = Math.round(((thumbPoint
+      //   + delta) * (this._max - this._min)) / this.lineElem.offsetWidth + this._min);
+      // const val = this._view.getSliderValue(this.thumbElem);
+
+      // const data = this._model.getData();
+      // this._values[0] = val;
+      this._values[0] = this._view.getSliderValue(this.thumbElem);
+      // this._model.setData(data);
+      // this._model.setData(this._options);
+
+      // this.valueElem.textContent = `${Math.round(((thumbPoint
+      //   + delta) * (this._max - this._min)) / this.lineElem.offsetWidth + this._min)}`;
+      this.valueElem.textContent = `${this._values[0]}`;
     }
-    const rightEdge = this.lineElem.offsetWidth - delta;
-    if (thumbPoint > rightEdge) {
-      thumbPoint = rightEdge;
-    }
-
-    this.thumbElem.style.left = `${thumbPoint}px`;
-    this.lineElem.style.background = `linear-gradient(to right, red ${thumbPoint}px, #e5e5e5 ${thumbPoint}px)`;
-    this.valueElem.style.left = `${thumbPoint - (this.valueElem.offsetWidth - this.thumbElem.offsetWidth) / 2}px`;
-
-    const val = Math.round(((thumbPoint
-      + delta) * (this._max - this._min)) / this.lineElem.offsetWidth + this._min);
-
-    // const data = this._model.getData();
-    this._values[0] = val;
-    // this._model.setData(data);
-    // this._model.setData(this._options);
-
-    this.valueElem.textContent = `${Math.round(((thumbPoint
-      + delta) * (this._max - this._min)) / this.lineElem.offsetWidth + this._min)}`;
   }
 
   onMouseUp(): void {
