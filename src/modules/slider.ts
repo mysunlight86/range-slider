@@ -20,7 +20,7 @@ export default class Slider {
   _step = 82;
   _mode = 'horizontal';
   _hasInterval = false;
-  _values = [this._step];
+  _values = [this._min, this._min + this._step];
 
   constructor(elemId: string, options?: optionsType) {
     this._selector = elemId;
@@ -30,7 +30,7 @@ export default class Slider {
       this._step = options.step ? options.step : this._step;
       this._mode = options.mode ? options.mode : this._mode;
       this._hasInterval = options.hasInterval ? options.hasInterval : this._hasInterval;
-      this._values = options.values ? options.values : [this._step];
+      this._values = options.values ? options.values : this._values;
     }
   }
 

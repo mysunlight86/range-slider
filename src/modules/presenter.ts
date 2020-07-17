@@ -187,6 +187,10 @@ class Presenter implements Observer {
   onMouseDown(event: MouseEvent): void {
     event.preventDefault();
 
+
+    const marker = event.target;
+    console.log(marker);
+
     document.addEventListener('mousemove', this.bindedOnMouseMove);
     document.addEventListener('mouseup', this.bindedOnMouseUp);
   }

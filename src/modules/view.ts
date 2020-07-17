@@ -45,15 +45,12 @@ export default class View {
   initSliderThumb(value: number) {
     this.thumbElem = new SliderThumb(this.lineElem).init();
     this.thumbElem.style.left = this.getPositionElement(this.thumbElem, value);
-    // this.thumbElem.style.left = '0';
     return this.thumbElem;
   }
 
-  initSliderValue(value?: number) {
+  initSliderValue(value: number) {
     this.valueElem = new SliderValue(this.lineElem).init();
-    // this.valueElem.textContent = `${this.getSliderValue(this.thumbElem)}`;
     this.valueElem.textContent = `${value}`;
-    // this.valueElem.style.left = this.getPositionElement(this.valueElem, Number(this.valueElem.textContent));
     this.valueElem.style.left = this.getPositionElement(this.valueElem, value);
     return this.valueElem;
   }
@@ -62,8 +59,12 @@ export default class View {
     this.scaleElem = new SliderScale(this.lineElem, this._min, this._max, this._step).init();
   }
 
+  getСoefficient() {
+    return this.lineElem.offsetWidth / (this._max - this._min);
+  }
+
   getPositionElement(elem: HTMLElement, val: number) {
-    return `${((val - this._min) * this.lineElem.offsetWidth) / (this._max - this._min) - elem.offsetWidth / 2}px`;
+    return `${(val - this._min) * this.getСoefficient() - elem.offsetWidth / 2}px`;
   }
 
   fillSliderLine(pointTo: number, pointFrom?: number) {
@@ -76,16 +77,12 @@ export default class View {
   }
 
   getSliderValue(elem: HTMLElement) {
-    // return Math.round(((elem.offsetLeft + elem.offsetWidth / 2 - this.lineElem.offsetLeft)
-    //   * (this._max - this._min)) / this.lineElem.offsetWidth + this._min);
-    return Math.round(((elem.offsetLeft + elem.offsetWidth / 2)
-      * (this._max - this._min)) / this.lineElem.offsetWidth + this._min);
+    return Math.round((elem.offsetLeft + elem.offsetWidth / 2) / this.getСoefficient() + this._min);
   }
 
   updateSliderThumb(elem: HTMLElement, value: number) {
     this.thumbElem = elem;
     this.thumbElem.style.left = this.getPositionElement(this.thumbElem, value);
-    // this.fillSliderLine(Number(this.thumbElem.style.left.slice(0, -2)));
   }
 
   updateSliderValue(label: HTMLElement, thumb: HTMLElement) {
@@ -98,9 +95,8 @@ export default class View {
   updateSliderScale() {
     const middleElems: any = Array.from(this.scaleElem.children);
     for (let i = 1; i < middleElems.length; i++) {
-      middleElems[i].style.left = `${(((Number(middleElems[i].textContent) - this._min)
-        * this.scaleElem.offsetWidth) / (this._max - this._min))
-        + this.scaleElem.offsetLeft - middleElems[i].offsetWidth / 2}px`;
+      middleElems[i].style.left = `${(Number(middleElems[i].textContent) - this._min)
+        * this.getСoefficient() + this.scaleElem.offsetLeft - middleElems[i].offsetWidth / 2}px`;
     }
   }
 

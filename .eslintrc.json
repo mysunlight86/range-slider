@@ -29,7 +29,7 @@
         }
     },
     "rules": {
-        "linebreak-style": [2, "windows"],
+        "linebreak-style": ["error", "unix"],
         "max-len": [
             "error",
             {

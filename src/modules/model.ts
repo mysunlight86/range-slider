@@ -104,7 +104,7 @@ class Model implements Subject {
     }
 
     if (this._step > (this._max - this._min)) {
-      this._step = this._max;
+      this._step = this._max - this._min;
     }
 
     if (this._hasInterval) {

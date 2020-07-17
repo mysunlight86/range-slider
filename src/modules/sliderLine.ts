@@ -1,13 +1,13 @@
 export default class SliderLine {
-  private _selector: string;
+  private _elemId: string;
   lineElem: HTMLElement;
 
   constructor(elemId: string) {
-    this._selector = elemId;
+    this._elemId = elemId;
   }
 
   init() {
-    this.lineElem = document.getElementById(this._selector);
+    this.lineElem = document.getElementById(this._elemId);
     this.lineElem.classList.add('slider-body');
     return this.lineElem;
   }
