@@ -103,7 +103,7 @@ class Model implements Subject {
       this._max = temp;
     }
 
-    if (this._step > (this._max - this._min)) {
+    if (this._step > (this._max - this._min) || this._step <= 0) {
       this._step = this._max - this._min;
     }
 
